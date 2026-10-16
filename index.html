@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -8,6 +8,11 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,7 +27,7 @@
             "short_name": "CardScore",
             "start_url": ".",
             "display": "standalone",
-            "background_color": "#f8fafc",
+            "background_color": "#f1f5f9",
             "theme_color": "#3b82f6",
             "icons": [{
                 "src": "https://cdn-icons-png.flaticon.com/512/8002/8002123.png",
@@ -40,21 +45,9 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: #f1f5f9;
-            color: #1e293b;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             min-height: 100vh;
-        }
-        .smart-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        }
-        .card-active {
-            border: 2px solid #2563eb !important;
-            background: #eff6ff !important;
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.1);
         }
         .btn-press {
             transition: all 0.1s ease;
@@ -66,29 +59,32 @@
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     </style>
 </head>
-<body class="flex flex-col justify-between p-3 sm:p-5 max-w-md mx-auto">
+<body class="bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col justify-between p-3 sm:p-5 max-w-md mx-auto transition-colors duration-200">
 
     <!-- Top Main Header -->
     <div>
-        <header class="smart-card p-4 rounded-2xl mb-4 flex items-center justify-between">
+        <header class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl mb-4 flex items-center justify-between shadow-sm">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-md shadow-blue-500/20">
                     ♠
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-base tracking-tight text-slate-900 leading-tight">Card Game Score</h1>
-                    <p class="text-[11px] text-blue-600 font-bold tracking-wide">Developed by Rakib</p>
+                    <h1 class="font-extrabold text-base tracking-tight leading-tight">Card Game Score</h1>
+                    <p class="text-[11px] text-blue-600 dark:text-blue-400 font-bold tracking-wide">Developed by Rakib</p>
                 </div>
             </div>
 
-            <!-- Target & Reset -->
-            <div class="flex items-center gap-2">
-                <div class="bg-slate-100 border border-slate-200 px-2.5 py-1.5 rounded-xl flex items-center gap-1.5">
-                    <span class="text-[10px] uppercase text-slate-500 font-bold">Target:</span>
+            <!-- Target, Dark Mode & Reset -->
+            <div class="flex items-center gap-1.5">
+                <div class="bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-2 py-1.5 rounded-xl flex items-center gap-1">
+                    <span class="text-[10px] uppercase text-slate-500 font-bold">Goal:</span>
                     <input id="targetInput" type="number" value="50" onchange="updateTarget(this.value)" 
-                        class="w-10 bg-transparent text-blue-600 font-extrabold text-center text-sm focus:outline-none">
+                        class="w-8 bg-transparent text-blue-600 dark:text-blue-400 font-extrabold text-center text-sm focus:outline-none">
                 </div>
-                <button onclick="resetGame()" title="Reset" class="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 hover:bg-rose-100 btn-press">
+                <button onclick="toggleDarkMode()" title="Toggle Dark Mode" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-amber-500 hover:bg-slate-200 dark:hover:bg-slate-700 btn-press">
+                    <span id="dark-icon">🌙</span>
+                </button>
+                <button onclick="resetGame()" title="Reset" class="p-2 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 text-rose-600 dark:text-rose-400 hover:bg-rose-100 btn-press">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
@@ -101,80 +97,80 @@
             <button id="tab-bridge" onclick="switchMode('bridge')" class="py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-blue-600 text-white shadow-md shadow-blue-500/20 flex items-center justify-center gap-2">
                 ♠ Call Bridge
             </button>
-            <button id="tab-break" onclick="switchMode('break')" class="py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all smart-card text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2">
+            <button id="tab-break" onclick="switchMode('break')" class="py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center gap-2">
                 ♣ Call Break
             </button>
         </div>
 
         <!-- Edit Mode Toggle Bar -->
         <div class="flex items-center justify-between mb-3 px-1">
-            <span id="selected-info" class="text-xs text-blue-600 font-bold">সিলেক্টেড: Team A</span>
-            <button onclick="toggleEditMode()" id="edit-toggle-btn" class="text-[11px] bg-white hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-xl border border-slate-200 font-semibold btn-press shadow-sm">
+            <span id="selected-info" class="text-xs text-blue-600 dark:text-blue-400 font-bold">সিলেক্টেড: Team A</span>
+            <button onclick="toggleEditMode()" id="edit-toggle-btn" class="text-[11px] bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 font-semibold btn-press shadow-sm">
                 ✏️ Edit Names
             </button>
         </div>
 
         <!-- SCOREBOARD SECTION -->
-        <!-- Call Bridge (2 Teams) -->
-        <div id="board-bridge" class="space-y-2.5 mb-4">
-            <div id="card-bridge-0" onclick="selectEntity(0)" class="smart-card p-4 rounded-2xl cursor-pointer transition-all card-active flex items-center justify-between relative">
-                <div>
-                    <div class="name-display-bridge-0 font-bold text-base text-slate-900">Team A</div>
-                    <div class="text-[10px] text-slate-500 font-medium">টোটাল পয়েন্ট</div>
-                </div>
-                <div id="score-bridge-0" class="text-3xl font-extrabold text-blue-600 font-mono">0</div>
+        <!-- Call Bridge (2 Teams Side by Side) -->
+        <div id="board-bridge" class="grid grid-cols-2 gap-3 mb-4">
+            <div id="card-bridge-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 p-4 rounded-2xl cursor-pointer transition-all shadow-sm text-center relative">
+                <div class="name-display-bridge-0 font-bold text-sm text-slate-800 dark:text-slate-200 mb-1 truncate">Team A</div>
+                <div id="score-bridge-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">পয়েন্ট</div>
             </div>
-            <div id="card-bridge-1" onclick="selectEntity(1)" class="smart-card p-4 rounded-2xl cursor-pointer transition-all flex items-center justify-between relative">
-                <div>
-                    <div class="name-display-bridge-1 font-bold text-base text-slate-900">Team B</div>
-                    <div class="text-[10px] text-slate-500 font-medium">টোটাল পয়েন্ট</div>
-                </div>
-                <div id="score-bridge-1" class="text-3xl font-extrabold text-emerald-600 font-mono">0</div>
+            <div id="card-bridge-1" onclick="selectEntity(1)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl cursor-pointer transition-all shadow-sm text-center relative">
+                <div class="name-display-bridge-1 font-bold text-sm text-slate-800 dark:text-slate-200 mb-1 truncate">Team B</div>
+                <div id="score-bridge-1" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
+                <div class="text-[10px] text-slate-400 mt-0.5">পয়েন্ট</div>
             </div>
         </div>
 
-        <!-- Call Break (4 Players 2x2 Grid) -->
+        <!-- Call Break (4 Players 2x2 Grid - Side by Side top & bottom) -->
         <div id="board-break" class="hidden grid-cols-2 gap-2.5 mb-4">
-            <div id="card-break-0" onclick="selectEntity(0)" class="smart-card p-3.5 rounded-2xl cursor-pointer transition-all card-active text-center">
-                <div class="name-display-break-0 font-bold text-xs text-slate-700 mb-1 truncate">Player 1</div>
-                <div id="score-break-0" class="text-3xl font-extrabold text-blue-600 font-mono">0</div>
+            <div id="card-break-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
+                <div class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 1</div>
+                <div id="score-break-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
             </div>
-            <div id="card-break-1" onclick="selectEntity(1)" class="smart-card p-3.5 rounded-2xl cursor-pointer transition-all text-center">
-                <div class="name-display-break-1 font-bold text-xs text-slate-700 mb-1 truncate">Player 2</div>
-                <div id="score-break-1" class="text-3xl font-extrabold text-emerald-600 font-mono">0</div>
+            <div id="card-break-1" onclick="selectEntity(1)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
+                <div class="name-display-break-1 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 2</div>
+                <div id="score-break-1" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
             </div>
-            <div id="card-break-2" onclick="selectEntity(2)" class="smart-card p-3.5 rounded-2xl cursor-pointer transition-all text-center">
-                <div class="name-display-break-2 font-bold text-xs text-slate-700 mb-1 truncate">Player 3</div>
-                <div id="score-break-2" class="text-3xl font-extrabold text-indigo-600 font-mono">0</div>
+            <div id="card-break-2" onclick="selectEntity(2)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
+                <div class="name-display-break-2 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 3</div>
+                <div id="score-break-2" class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono">0</div>
             </div>
-            <div id="card-break-3" onclick="selectEntity(3)" class="smart-card p-3.5 rounded-2xl cursor-pointer transition-all text-center">
-                <div class="name-display-break-3 font-bold text-xs text-slate-700 mb-1 truncate">Player 4</div>
-                <div id="score-break-3" class="text-3xl font-extrabold text-purple-600 font-mono">0</div>
+            <div id="card-break-3" onclick="selectEntity(3)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
+                <div class="name-display-break-3 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 4</div>
+                <div id="score-break-3" class="text-3xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">0</div>
             </div>
         </div>
 
         <!-- Name Edit Box -->
-        <div id="name-edit-box" class="smart-card p-3.5 rounded-2xl mb-4 hidden border-blue-300 bg-blue-50/50">
-            <div class="text-xs font-bold text-blue-700 mb-2 flex items-center justify-between">
+        <div id="name-edit-box" class="bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-900 p-3.5 rounded-2xl mb-4 hidden shadow-sm">
+            <div class="text-xs font-bold text-blue-600 dark:text-blue-400 mb-2 flex items-center justify-between">
                 <span>নাম পরিবর্তন করুন:</span>
-                <button onclick="toggleEditMode()" class="text-slate-500 hover:text-slate-800 text-xs">✕ বন্ধ করুন</button>
+                <button onclick="toggleEditMode()" class="text-slate-400 hover:text-slate-600 text-xs">✕ বন্ধ করুন</button>
             </div>
             <div id="name-inputs-container" class="space-y-2"></div>
         </div>
 
-        <!-- NUMBER PAD SECTION -->
-        <div class="smart-card rounded-2xl p-3.5 mb-4">
+        <!-- NUMBER PAD SECTION (Left: Negative, Right: Positive) -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 mb-4 shadow-sm">
             <div class="flex items-center justify-between mb-3">
-                <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">পয়েন্ট যোগ করুন</span>
-                <button onclick="undoLast()" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1 rounded-xl border border-rose-200 flex items-center gap-1 btn-press font-semibold">
+                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">পয়েন্ট যোগ করুন</span>
+                <button onclick="undoLast()" class="text-xs bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 text-rose-600 dark:text-rose-400 px-3 py-1 rounded-xl border border-rose-200 dark:border-rose-900 flex items-center gap-1 btn-press font-semibold">
                     ↩ Undo
                 </button>
             </div>
-            <div id="numpad-grid" class="grid grid-cols-4 sm:grid-cols-5 gap-2"></div>
+            
+            <!-- Side-by-Side Negative & Positive Columns -->
+            <div class="grid grid-cols-2 gap-3" id="numpad-columns">
+                <!-- Generated by JS -->
+            </div>
         </div>
 
         <!-- HISTORY SECTION -->
-        <div class="smart-card rounded-2xl p-3.5 mb-4">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 mb-4 shadow-sm">
             <div class="flex items-center justify-between mb-2">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">📜 হিস্টোরি</h3>
                 <span id="round-count" class="text-[11px] text-slate-400 font-mono">0 Entries</span>
@@ -188,19 +184,19 @@
     <!-- Footer -->
     <footer class="mt-2 text-center pb-2">
         <p class="text-[11px] text-slate-500 font-medium">
-            Card Game Score • Developed by <span class="text-slate-800 font-bold">Rakib</span>
+            Card Game Score • Developed by <span class="text-slate-800 dark:text-slate-200 font-bold">Rakib</span>
         </p>
     </footer>
 
     <!-- WINNER MODAL -->
-    <div id="winner-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="smart-card border-2 border-blue-500 rounded-3xl p-6 max-w-xs w-full text-center shadow-2xl bg-white">
+    <div id="winner-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+        <div class="bg-white dark:bg-slate-900 border-2 border-blue-500 rounded-3xl p-6 max-w-xs w-full text-center shadow-2xl">
             <div class="text-5xl mb-3">🏆</div>
-            <h2 class="text-2xl font-extrabold text-slate-900 mb-1">অভিনন্দন!</h2>
-            <p id="winner-name" class="text-lg font-bold text-blue-600 mb-1">Winner!</p>
-            <p id="winner-score" class="text-xs text-slate-500 mb-5">টার্গেট পয়েন্ট সফলভাবে পূরণ হয়েছে!</p>
+            <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white mb-1">অভিনন্দন!</h2>
+            <p id="winner-name" class="text-lg font-bold text-blue-600 dark:text-blue-400 mb-1">Winner!</p>
+            <p id="winner-score" class="text-xs text-slate-500 dark:text-slate-400 mb-5">টার্গেট পয়েন্ট সফলভাবে পূরণ হয়েছে!</p>
             <div class="flex gap-2">
-                <button onclick="closeModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs hover:bg-slate-200 btn-press">
+                <button onclick="closeModal()" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-200 btn-press">
                     চালিয়ে যান
                 </button>
                 <button onclick="resetGame(); closeModal();" class="flex-1 py-2.5 rounded-xl bg-blue-600 text-white font-extrabold text-xs shadow-md shadow-blue-500/20">
@@ -217,31 +213,53 @@
             selectedIdx: 0,
             target: 50,
             isEditing: false,
+            darkMode: false,
             bridge: {
                 names: ['Team A', 'Team B'],
                 scores: [0, 0],
                 history: [],
-                buttons: [-10, -9, -8, -7, -5, -4, 7, 8, 9, 10, 13]
+                negatives: [-4, -5, -7, -8, -9, -10],
+                positives: [7, 8, 9, 10, 13]
             },
             break: {
                 names: ['Player 1', 'Player 2', 'Player 3', 'Player 4'],
                 scores: [0, 0, 0, 0],
                 history: [],
-                buttons: [-8, -7, -6, -5, -4, -3, -2, 2, 3, 4, 5, 6, 7, 8]
+                negatives: [-2, -3, -4, -5, -6, -7, -8],
+                positives: [2, 3, 4, 5, 6, 7, 8]
             }
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibSmart');
+            const saved = localStorage.getItem('cardGameScoreRakibCol');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
             document.getElementById('targetInput').value = state.target;
+            applyTheme();
             renderAll();
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibSmart', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibCol', JSON.stringify(state));
+        }
+
+        function toggleDarkMode() {
+            state.darkMode = !state.darkMode;
+            saveState();
+            applyTheme();
+        }
+
+        function applyTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('dark-icon');
+            if (state.darkMode) {
+                html.classList.add('dark');
+                icon.innerText = '☀️';
+            } else {
+                html.classList.remove('dark');
+                icon.innerText = '🌙';
+            }
         }
 
         function switchMode(newMode) {
@@ -263,11 +281,11 @@
             const btn = document.getElementById('edit-toggle-btn');
             if (state.isEditing) {
                 box.classList.remove('hidden');
-                btn.classList.add('bg-blue-100', 'text-blue-700', 'border-blue-300');
+                btn.classList.add('bg-blue-100', 'dark:bg-blue-950', 'text-blue-700', 'dark:text-blue-300', 'border-blue-300');
                 renderNameInputs();
             } else {
                 box.classList.add('hidden');
-                btn.classList.remove('bg-blue-100', 'text-blue-700', 'border-blue-300');
+                btn.classList.remove('bg-blue-100', 'dark:bg-blue-950', 'text-blue-700', 'dark:text-blue-300', 'border-blue-300');
             }
         }
 
@@ -276,9 +294,9 @@
             const names = state[state.mode].names;
             container.innerHTML = names.map((name, i) => `
                 <div class="flex items-center gap-2">
-                    <span class="text-xs text-slate-600 w-16 font-medium">#${i+1} Name:</span>
+                    <span class="text-xs text-slate-600 dark:text-slate-400 w-16 font-medium">#${i+1} Name:</span>
                     <input type="text" value="${name}" onchange="saveName(${i}, this.value)"
-                        class="flex-1 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-900 font-bold focus:outline-none focus:border-blue-600">
+                        class="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-900 dark:text-white font-bold focus:outline-none focus:border-blue-600">
                 </div>
             `).join('');
         }
@@ -301,24 +319,43 @@
             }
         }
 
+        // Render Left (Negative) & Right (Positive) Columns
         function renderNumpad() {
-            const grid = document.getElementById('numpad-grid');
-            const btns = state[state.mode].buttons;
-            grid.innerHTML = '';
+            const container = document.getElementById('numpad-columns');
+            const data = state[state.mode];
+            container.innerHTML = '';
 
-            btns.forEach(num => {
-                const btn = document.createElement('button');
-                const isNegative = num < 0;
-                const label = num > 0 ? `+${num}` : `${num}`;
-
-                let colorClass = 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100';
-                if (isNegative) colorClass = 'bg-rose-50 text-rose-700 border-rose-200 hover:bg-rose-100';
-
-                btn.className = `py-3 rounded-xl font-bold text-sm border btn-press ${colorClass} shadow-sm`;
-                btn.innerText = label;
-                btn.onclick = () => addPoints(num);
-                grid.appendChild(btn);
+            // Left Column: Negatives
+            const leftCol = document.createElement('div');
+            leftCol.className = "space-y-1.5";
+            data.negatives.forEach(num => {
+                leftCol.appendChild(createNumButton(num, 'rose'));
             });
+
+            // Right Column: Positives
+            const rightCol = document.createElement('div');
+            rightCol.className = "space-y-1.5";
+            data.positives.forEach(num => {
+                rightCol.appendChild(createNumButton(num, 'emerald'));
+            });
+
+            container.appendChild(leftCol);
+            container.appendChild(rightCol);
+        }
+
+        function createNumButton(num, type) {
+            const btn = document.createElement('button');
+            const label = num > 0 ? `+${num}` : `${num}`;
+            
+            let colorClass = 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900 hover:bg-emerald-100 dark:hover:bg-emerald-900/50';
+            if (type === 'rose') {
+                colorClass = 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900 hover:bg-rose-100 dark:hover:bg-rose-900/50';
+            }
+
+            btn.className = `w-full py-2.5 rounded-xl font-bold text-sm border btn-press ${colorClass} shadow-sm`;
+            btn.innerText = label;
+            btn.onclick = () => addPoints(num);
+            return btn;
         }
 
         function addPoints(pts) {
@@ -376,9 +413,9 @@
             for (let i = 0; i < count; i++) {
                 const card = document.getElementById(`card-${state.mode}-${i}`);
                 if (i === state.selectedIdx) {
-                    card.classList.add('card-active');
+                    card.className = card.className.replace(/border-slate-200 dark:border-slate-800/g, 'border-blue-600 dark:border-blue-500 border-2');
                 } else {
-                    card.classList.remove('card-active');
+                    card.className = card.className.replace(/border-blue-600 dark:border-blue-500 border-2/g, 'border-slate-200 dark:border-slate-800 border');
                 }
             }
             const activeName = state[state.mode].names[state.selectedIdx];
@@ -399,20 +436,20 @@
 
             list.innerHTML = history.map((item, index) => {
                 const badge = item.points >= 0 
-                    ? 'text-emerald-700 bg-emerald-50 border-emerald-200' 
-                    : 'text-rose-700 bg-rose-50 border-rose-200';
+                    ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900' 
+                    : 'text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900';
                 const sign = item.points > 0 ? `+${item.points}` : item.points;
                 const roundNo = history.length - index;
 
                 return `
-                    <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-xl border border-slate-200 text-xs">
+                    <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
                         <div class="flex items-center gap-2">
                             <span class="text-[10px] text-slate-400 font-mono">#${roundNo}</span>
-                            <span class="font-bold text-slate-800">${names[item.entityIdx]}</span>
+                            <span class="font-bold text-slate-800 dark:text-slate-200">${names[item.entityIdx]}</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="px-2 py-0.5 rounded-lg font-bold border ${badge}">${sign}</span>
-                            <span class="text-slate-500">টোটাল: <b class="text-slate-900 font-mono">${item.newTotal}</b></span>
+                            <span class="text-slate-500 dark:text-slate-400">টোটাল: <b class="text-slate-900 dark:text-white font-mono">${item.newTotal}</b></span>
                         </div>
                     </div>
                 `;
@@ -469,14 +506,18 @@
 
             if (state.mode === 'bridge') {
                 tabBridge.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-blue-600 text-white shadow-md shadow-blue-500/20 flex items-center justify-center gap-2";
-                tabBreak.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all smart-card text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2";
+                tabBreak.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center gap-2";
                 boardBridge.classList.remove('hidden');
+                boardBridge.classList.add('grid');
                 boardBreak.classList.add('hidden');
+                boardBreak.classList.remove('grid');
             } else {
                 tabBreak.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-blue-600 text-white shadow-md shadow-blue-500/20 flex items-center justify-center gap-2";
-                tabBridge.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all smart-card text-slate-600 hover:text-slate-900 flex items-center justify-center gap-2";
+                tabBridge.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center justify-center gap-2";
                 boardBreak.classList.remove('hidden');
+                boardBreak.classList.add('grid');
                 boardBridge.classList.add('hidden');
+                boardBridge.classList.remove('grid');
             }
 
             renderScoresAndNames();
