@@ -219,7 +219,7 @@
                 scores: [0, 0],
                 history: [],
                 negatives: [-4, -5, -7, -8, -9, -10],
-                positives: [7, 8, 9, 10, 13]
+                positives: [4, 5, 7, 8, 9, 10, 13]
             },
             break: {
                 names: ['Player 1', 'Player 2', 'Player 3', 'Player 4'],
@@ -231,7 +231,7 @@
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibColFix');
+            const saved = localStorage.getItem('cardGameScoreRakibColPlus');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -241,7 +241,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibColFix', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibColPlus', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
