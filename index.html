@@ -181,11 +181,16 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer with Developer Credit -->
     <footer class="mt-2 text-center pb-2">
-        <p class="text-[11px] text-slate-500 font-medium">
-            Card Game Score • Developed by <span class="text-slate-800 dark:text-slate-200 font-bold">Rakib</span>
-        </p>
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-2.5 rounded-xl shadow-sm inline-block w-full">
+            <p class="text-xs font-bold text-blue-600 dark:text-blue-400">
+                Developed by Rakib
+            </p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                Student of Jagannath University
+            </p>
+        </div>
     </footer>
 
     <!-- WINNER MODAL -->
@@ -231,7 +236,7 @@
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibColPlus');
+            const saved = localStorage.getItem('cardGameScoreRakibFinal');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -241,7 +246,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibColPlus', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibFinal', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
