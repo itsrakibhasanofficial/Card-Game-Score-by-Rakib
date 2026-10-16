@@ -187,8 +187,11 @@
             <p class="text-xs font-bold text-blue-600 dark:text-blue-400">
                 Developed by Rakib
             </p>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
-                Student of Jagannath University
+            <p class="text-[11px] text-slate-600 dark:text-slate-300 font-semibold">
+                Department of Political Science
+            </p>
+            <p class="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+                Jagannath University
             </p>
         </div>
     </footer>
@@ -236,7 +239,7 @@
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibFinal');
+            const saved = localStorage.getItem('cardGameScoreRakibDept');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -246,7 +249,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibFinal', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibDept', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
@@ -377,9 +380,9 @@
                 time: timeStr
             });
 
-            if (state.mode === 'break') {
-                state.selectedIdx = (state.selectedIdx + 1) % 4;
-            }
+            // Auto-shift to next entity (2 for Bridge, 4 for Break)
+            const maxIdx = state.mode === 'bridge' ? 2 : 4;
+            state.selectedIdx = (state.selectedIdx + 1) % maxIdx;
 
             saveState();
             renderScoresAndNames();
