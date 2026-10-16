@@ -3,97 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Royal Score - Card Game Tracker</title>
-    <meta name="theme-color" content="#0f172a">
+    <title>Card Game Score - Rakib</title>
+    <meta name="theme-color" content="#090d16">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Confetti Library for Winner Popup -->
+    <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <!-- Dynamic PWA Manifest & Service Worker Setup -->
+    <!-- Dynamic PWA Manifest -->
     <script>
         const manifest = {
-            "name": "Royal Card Score Tracker",
+            "name": "Card Game Score Tracker",
             "short_name": "CardScore",
             "start_url": ".",
             "display": "standalone",
-            "background_color": "#0f172a",
-            "theme_color": "#0f172a",
+            "background_color": "#090d16",
+            "theme_color": "#090d16",
             "icons": [{
                 "src": "https://cdn-icons-png.flaticon.com/512/8002/8002123.png",
                 "sizes": "512x512",
                 "type": "image/png"
             }]
         };
-        const stringManifest = JSON.stringify(manifest);
-        const blob = new Blob([stringManifest], {type: 'application/json'});
-        const manifestURL = URL.createObjectURL(blob);
+        const blob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
         const link = document.createElement('link');
         link.rel = 'manifest';
-        link.href = manifestURL;
+        link.href = URL.createObjectURL(blob);
         document.head.appendChild(link);
     </script>
 
     <style>
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: radial-gradient(circle at top, #1e293b 0%, #090d16 100%);
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 50%, #030712 100%);
             color: #f8fafc;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
+            min-height: 100vh;
         }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.65);
-            backdrop-filter: blur(12px);
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        .active-card {
+        .card-active {
             border: 2px solid #f59e0b !important;
-            background: rgba(245, 158, 11, 0.12) !important;
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(30, 41, 59, 0.8) 100%) !important;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.25);
         }
-        .num-btn {
-            transition: all 0.12s ease;
+        .btn-press {
+            transition: all 0.1s ease;
         }
-        .num-btn:active {
-            transform: scale(0.92);
+        .btn-press:active {
+            transform: scale(0.94);
         }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-3 sm:p-5 max-w-md mx-auto">
+<body class="flex flex-col justify-between p-3 sm:p-5 max-w-md mx-auto">
 
-    <!-- Top Section -->
+    <!-- Top Main Header -->
     <div>
-        <!-- App Header -->
-        <header class="flex items-center justify-between mb-4">
-            <div class="flex items-center gap-2">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center text-slate-950 font-extrabold text-xl shadow-lg shadow-amber-500/20">
-                    ♠
+        <header class="glass-panel p-4 rounded-2xl mb-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-yellow-300 flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg shadow-amber-500/30">
+                    🂡
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-lg tracking-tight text-white leading-none">ROYAL SCORE</h1>
-                    <span class="text-[11px] text-slate-400">Card Game Calculator</span>
+                    <h1 class="font-extrabold text-lg tracking-tight text-white leading-tight">Card Game Score</h1>
+                    <p class="text-[11px] text-amber-400 font-semibold tracking-wide">Developed by Rakib</p>
                 </div>
             </div>
 
-            <!-- Target Score & Reset -->
+            <!-- Target & Reset -->
             <div class="flex items-center gap-2">
-                <div class="glass-card px-2.5 py-1.5 rounded-xl flex items-center gap-1.5">
-                    <span class="text-xs text-slate-400 font-medium">Target:</span>
+                <div class="bg-slate-900/80 border border-slate-700/60 px-2.5 py-1.5 rounded-xl flex items-center gap-1.5">
+                    <span class="text-[10px] uppercase text-slate-400 font-bold">Target:</span>
                     <input id="targetInput" type="number" value="50" onchange="updateTarget(this.value)" 
-                        class="w-12 bg-slate-800/90 text-amber-400 font-bold text-center text-sm rounded-lg py-0.5 focus:outline-none focus:ring-1 focus:ring-amber-400">
+                        class="w-10 bg-transparent text-amber-400 font-extrabold text-center text-sm focus:outline-none">
                 </div>
-                <button onclick="resetGame()" title="Reset Game" class="glass-card p-2 rounded-xl text-rose-400 hover:bg-rose-500/10 active:scale-95 transition">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <button onclick="resetGame()" title="Reset" class="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500/20 btn-press">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
                 </button>
@@ -101,186 +98,207 @@
         </header>
 
         <!-- Mode Switcher Tabs -->
-        <div class="glass-card p-1 rounded-2xl grid grid-cols-2 gap-1 mb-4">
-            <button id="tab-team" onclick="switchMode('team')" class="py-2 rounded-xl font-bold text-xs sm:text-sm transition-all bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-md">
-                👥 2 Teams Mode
+        <div class="grid grid-cols-2 gap-2 mb-4">
+            <button id="tab-bridge" onclick="switchMode('bridge')" class="py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2">
+                ♠ Call Bridge
             </button>
-            <button id="tab-player" onclick="switchMode('player')" class="py-2 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-300 hover:text-white">
-                🃏 4 Players Mode
+            <button id="tab-break" onclick="switchMode('break')" class="py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all glass-panel text-slate-300 hover:text-white flex items-center justify-center gap-2">
+                ♣ Call Break
             </button>
         </div>
 
-        <!-- Instruction Hint -->
-        <div class="text-center mb-2.5">
-            <span class="text-[11px] text-slate-400 bg-slate-800/60 px-3 py-1 rounded-full border border-slate-700/50">
-                💡 নামের ওপর ট্যাপ করে নাম পরিবর্তন করুন • কার্ড সিলেক্ট করে পয়েন্ট চাপুন
-            </span>
+        <!-- Edit Mode Toggle Bar -->
+        <div class="flex items-center justify-between mb-3 px-1">
+            <span id="selected-info" class="text-xs text-amber-400 font-bold">সিলেক্টেড: Team A</span>
+            <button onclick="toggleEditMode()" id="edit-toggle-btn" class="text-[11px] bg-slate-800/80 hover:bg-slate-700 text-slate-300 px-3 py-1 rounded-lg border border-slate-700 font-medium btn-press">
+                ✏️ Edit Names
+            </button>
         </div>
 
         <!-- SCOREBOARD SECTION -->
-        <!-- 1. Team Mode (Side by Side) -->
-        <div id="board-team" class="grid grid-cols-2 gap-3 mb-4">
-            <!-- Team A -->
-            <div id="card-team-0" onclick="selectEntity(0)" class="glass-card rounded-2xl p-3.5 text-center cursor-pointer transition-all active-card relative">
-                <div class="text-[10px] uppercase tracking-wider text-amber-400/80 font-semibold mb-0.5">Tap to Edit Name</div>
-                <input type="text" id="name-team-0" value="Team A" onclick="event.stopPropagation()" onchange="saveName('team', 0, this.value)"
-                    class="w-full bg-transparent text-center font-bold text-base sm:text-lg text-white focus:outline-none focus:border-b border-amber-400 mb-1">
-                <div id="score-team-0" class="text-4xl sm:text-5xl font-extrabold text-amber-400 my-1">0</div>
-                <div class="text-[11px] text-slate-400">Total Points</div>
+        <!-- Call Bridge (2 Teams Vertical/Stacked or Clean Grid) -->
+        <div id="board-bridge" class="space-y-2.5 mb-4">
+            <div id="card-bridge-0" onclick="selectEntity(0)" class="glass-panel p-4 rounded-2xl cursor-pointer transition-all card-active flex items-center justify-between relative overflow-hidden">
+                <div>
+                    <div class="name-display-bridge-0 font-bold text-base text-white">Team A</div>
+                    <div class="text-[10px] text-slate-400">টোটাল পয়েন্ট</div>
+                </div>
+                <div id="score-bridge-0" class="text-3xl font-black text-amber-400 font-mono">0</div>
             </div>
-
-            <!-- Team B -->
-            <div id="card-team-1" onclick="selectEntity(1)" class="glass-card rounded-2xl p-3.5 text-center cursor-pointer transition-all relative">
-                <div class="text-[10px] uppercase tracking-wider text-amber-400/80 font-semibold mb-0.5">Tap to Edit Name</div>
-                <input type="text" id="name-team-1" value="Team B" onclick="event.stopPropagation()" onchange="saveName('team', 1, this.value)"
-                    class="w-full bg-transparent text-center font-bold text-base sm:text-lg text-white focus:outline-none focus:border-b border-amber-400 mb-1">
-                <div id="score-team-1" class="text-4xl sm:text-5xl font-extrabold text-emerald-400 my-1">0</div>
-                <div class="text-[11px] text-slate-400">Total Points</div>
+            <div id="card-bridge-1" onclick="selectEntity(1)" class="glass-panel p-4 rounded-2xl cursor-pointer transition-all flex items-center justify-between relative overflow-hidden">
+                <div>
+                    <div class="name-display-bridge-1 font-bold text-base text-white">Team B</div>
+                    <div class="text-[10px] text-slate-400">টোটাল পয়েন্ট</div>
+                </div>
+                <div id="score-bridge-1" class="text-3xl font-black text-emerald-400 font-mono">0</div>
             </div>
         </div>
 
-        <!-- 2. 4 Players Mode (Side by Side 2x2 or 4 Columns) -->
-        <div id="board-player" class="hidden grid-cols-2 gap-2.5 mb-4">
-            <!-- Dynamically populated or static 4 blocks -->
-            <div id="card-player-0" onclick="selectEntity(0)" class="glass-card rounded-2xl p-2.5 text-center cursor-pointer transition-all active-card">
-                <input type="text" id="name-player-0" value="Player 1" onclick="event.stopPropagation()" onchange="saveName('player', 0, this.value)"
-                    class="w-full bg-transparent text-center font-bold text-sm text-white focus:outline-none focus:border-b border-amber-400">
-                <div id="score-player-0" class="text-3xl font-extrabold text-amber-400 my-0.5">0</div>
+        <!-- Call Break (4 Players 2x2 Grid) -->
+        <div id="board-break" class="hidden grid-cols-2 gap-2.5 mb-4">
+            <div id="card-break-0" onclick="selectEntity(0)" class="glass-panel p-3.5 rounded-2xl cursor-pointer transition-all card-active text-center">
+                <div class="name-display-break-0 font-bold text-xs text-slate-200 mb-1 truncate">Player 1</div>
+                <div id="score-break-0" class="text-3xl font-black text-amber-400 font-mono">0</div>
             </div>
-            <div id="card-player-1" onclick="selectEntity(1)" class="glass-card rounded-2xl p-2.5 text-center cursor-pointer transition-all">
-                <input type="text" id="name-player-1" value="Player 2" onclick="event.stopPropagation()" onchange="saveName('player', 1, this.value)"
-                    class="w-full bg-transparent text-center font-bold text-sm text-white focus:outline-none focus:border-b border-amber-400">
-                <div id="score-player-1" class="text-3xl font-extrabold text-emerald-400 my-0.5">0</div>
+            <div id="card-break-1" onclick="selectEntity(1)" class="glass-panel p-3.5 rounded-2xl cursor-pointer transition-all text-center">
+                <div class="name-display-break-1 font-bold text-xs text-slate-200 mb-1 truncate">Player 2</div>
+                <div id="score-break-1" class="text-3xl font-black text-emerald-400 font-mono">0</div>
             </div>
-            <div id="card-player-2" onclick="selectEntity(2)" class="glass-card rounded-2xl p-2.5 text-center cursor-pointer transition-all">
-                <input type="text" id="name-player-2" value="Player 3" onclick="event.stopPropagation()" onchange="saveName('player', 2, this.value)"
-                    class="w-full bg-transparent text-center font-bold text-sm text-white focus:outline-none focus:border-b border-amber-400">
-                <div id="score-player-2" class="text-3xl font-extrabold text-sky-400 my-0.5">0</div>
+            <div id="card-break-2" onclick="selectEntity(2)" class="glass-panel p-3.5 rounded-2xl cursor-pointer transition-all text-center">
+                <div class="name-display-break-2 font-bold text-xs text-slate-200 mb-1 truncate">Player 3</div>
+                <div id="score-break-2" class="text-3xl font-black text-sky-400 font-mono">0</div>
             </div>
-            <div id="card-player-3" onclick="selectEntity(3)" class="glass-card rounded-2xl p-2.5 text-center cursor-pointer transition-all">
-                <input type="text" id="name-player-3" value="Player 4" onclick="event.stopPropagation()" onchange="saveName('player', 3, this.value)"
-                    class="w-full bg-transparent text-center font-bold text-sm text-white focus:outline-none focus:border-b border-amber-400">
-                <div id="score-player-3" class="text-3xl font-extrabold text-purple-400 my-0.5">0</div>
+            <div id="card-break-3" onclick="selectEntity(3)" class="glass-panel p-3.5 rounded-2xl cursor-pointer transition-all text-center">
+                <div class="name-display-break-3 font-bold text-xs text-slate-200 mb-1 truncate">Player 4</div>
+                <div id="score-break-3" class="text-3xl font-black text-purple-400 font-mono">0</div>
+            </div>
+        </div>
+
+        <!-- Name Edit Modal / Box (Hidden by default, toggled via Edit Names) -->
+        <div id="name-edit-box" class="glass-panel p-3.5 rounded-2xl mb-4 hidden border-amber-500/40">
+            <div class="text-xs font-bold text-amber-400 mb-2 flex items-center justify-between">
+                <span>নাম পরিবর্তন করুন (ক্লিক করে এডিট করুন):</span>
+                <button onclick="toggleEditMode()" class="text-slate-400 hover:text-white text-xs">✕ বন্ধ করুন</button>
+            </div>
+            <div id="name-inputs-container" class="space-y-2">
+                <!-- Dynamically generated inputs -->
             </div>
         </div>
 
         <!-- NUMBER PAD SECTION -->
-        <div class="glass-card rounded-2xl p-3 mb-4">
-            <div class="flex items-center justify-between mb-2">
-                <span id="selected-indicator" class="text-xs font-bold text-amber-400">Selected: Team A</span>
-                <button onclick="undoLast()" class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-300 px-2.5 py-1 rounded-lg flex items-center gap-1 active:scale-95 transition">
-                    ↩ Undo Last
+        <div class="glass-panel rounded-2xl p-3.5 mb-4">
+            <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">পয়েন্ট যোগ করুন</span>
+                <button onclick="undoLast()" class="text-xs bg-slate-800 hover:bg-slate-700 text-rose-300 px-3 py-1 rounded-xl border border-rose-500/20 flex items-center gap-1 btn-press font-medium">
+                    ↩ Undo
                 </button>
             </div>
-            <!-- Buttons Grid -->
-            <div id="numpad-grid" class="grid grid-cols-6 gap-1.5">
+            <!-- Dynamic Buttons Grid based on Mode -->
+            <div id="numpad-grid" class="grid grid-cols-4 sm:grid-cols-5 gap-2">
                 <!-- Populated by JS -->
             </div>
         </div>
 
         <!-- HISTORY SECTION -->
-        <div class="glass-card rounded-2xl p-3 mb-4">
+        <div class="glass-panel rounded-2xl p-3.5 mb-4">
             <div class="flex items-center justify-between mb-2">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">📜 Score History</h3>
-                <span id="round-count" class="text-[11px] text-slate-400">0 Entries</span>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">📜 হিস্টোরি</h3>
+                <span id="round-count" class="text-[11px] text-slate-500 font-mono">0 Entries</span>
             </div>
-            <div id="history-list" class="max-h-36 overflow-y-auto space-y-1.5 pr-1">
-                <div class="text-center text-xs text-slate-500 py-4">এখনো কোনো পয়েন্ট যোগ করা হয়নি</div>
+            <div id="history-list" class="max-h-32 overflow-y-auto space-y-1.5 pr-1">
+                <div class="text-center text-xs text-slate-500 py-4">এখনো কোনো হিসাব যোগ করা হয়নি</div>
             </div>
         </div>
     </div>
 
-    <!-- Developer Footer -->
-    <footer class="mt-2 pt-3 border-t border-slate-800/80 text-center">
-        <div class="inline-block glass-card px-4 py-2 rounded-2xl">
-            <p class="text-xs font-bold bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-400 bg-clip-text text-transparent">
-                Developed by Rakib
-            </p>
-            <p class="text-[11px] text-slate-400 font-medium">
-                Student of Jagannath University
-            </p>
-        </div>
+    <!-- Footer -->
+    <footer class="mt-2 text-center pb-2">
+        <p class="text-[11px] text-slate-500 font-medium">
+            Card Game Score • Developed by <span class="text-slate-300 font-semibold">Rakib</span>
+        </p>
     </footer>
 
-    <!-- WINNER CONGRATULATIONS POPUP MODAL -->
-    <div id="winner-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-        <div class="glass-card border-2 border-amber-400/50 rounded-3xl p-6 max-w-xs w-full text-center shadow-2xl transform animate-bounce-short">
+    <!-- WINNER MODAL -->
+    <div id="winner-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4 z-50">
+        <div class="glass-panel border-2 border-amber-400/60 rounded-3xl p-6 max-w-xs w-full text-center shadow-2xl">
             <div class="text-5xl mb-3">🏆</div>
-            <h2 class="text-2xl font-extrabold text-white mb-1">অভিনন্দন!</h2>
-            <p id="winner-name" class="text-xl font-bold text-amber-400 mb-2">Team A Wins!</p>
-            <p id="winner-score" class="text-xs text-slate-300 mb-5">টার্গেট পয়েন্ট পূর্ণ হয়েছে!</p>
+            <h2 class="text-2xl font-black text-white mb-1">অভিনন্দন!</h2>
+            <p id="winner-name" class="text-lg font-bold text-amber-400 mb-1">Winner!</p>
+            <p id="winner-score" class="text-xs text-slate-300 mb-5">টার্গেট পয়েন্ট সফলভাবে পূরণ হয়েছে!</p>
             <div class="flex gap-2">
-                <button onclick="closeModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-semibold text-xs hover:bg-slate-700">
+                <button onclick="closeModal()" class="flex-1 py-2.5 rounded-xl bg-slate-800 text-slate-300 font-bold text-xs hover:bg-slate-700 btn-press">
                     চালিয়ে যান
                 </button>
-                <button onclick="resetGame(); closeModal();" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold text-xs shadow-lg">
+                <button onclick="resetGame(); closeModal();" class="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-black text-xs shadow-lg">
                     নতুন গেম
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MAIN JAVASCRIPT LOGIC -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Default State
+        // Data Structure
         let state = {
-            mode: 'team', // 'team' or 'player'
+            mode: 'bridge', // 'bridge' or 'break'
             selectedIdx: 0,
             target: 50,
-            team: {
+            isEditing: false,
+            bridge: {
                 names: ['Team A', 'Team B'],
                 scores: [0, 0],
-                history: [] // { entityIdx, name, points, time }
+                history: [],
+                buttons: [-10, -9, -8, -7, -5, -4, 7, 8, 9, 10, 13]
             },
-            player: {
+            break: {
                 names: ['Player 1', 'Player 2', 'Player 3', 'Player 4'],
                 scores: [0, 0, 0, 0],
-                history: []
+                history: [],
+                buttons: [-8, -7, -6, -5, -4, -3, -2, 2, 3, 4, 5, 6, 7, 8]
             }
         };
 
-        // Load saved data from LocalStorage
         function loadState() {
-            const saved = localStorage.getItem('royalScoreState');
+            const saved = localStorage.getItem('cardGameScoreRakib');
             if (saved) {
-                try {
-                    state = JSON.parse(saved);
-                } catch (e) {
-                    console.error(e);
-                }
+                try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
             document.getElementById('targetInput').value = state.target;
             renderAll();
         }
 
         function saveState() {
-            localStorage.setItem('royalScoreState', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakib', JSON.stringify(state));
         }
 
-        // Switch between 2 Teams & 4 Players
         function switchMode(newMode) {
             state.mode = newMode;
             state.selectedIdx = 0;
+            state.isEditing = false;
             saveState();
             renderAll();
         }
 
-        // Select Active Team or Player
         function selectEntity(idx) {
             state.selectedIdx = idx;
             updateHighlight();
         }
 
-        // Save Edited Name
-        function saveName(mode, idx, val) {
-            const cleanName = val.trim() || (mode === 'team' ? `Team ${idx+1}` : `Player ${idx+1}`);
-            state[mode].names[idx] = cleanName;
+        function toggleEditMode() {
+            state.isEditing = !state.isEditing;
+            const box = document.getElementById('name-edit-box');
+            const btn = document.getElementById('edit-toggle-btn');
+            if (state.isEditing) {
+                box.classList.remove('hidden');
+                btn.classList.add('bg-amber-500/20', 'text-amber-400', 'border-amber-500/40');
+                renderNameInputs();
+            } else {
+                box.classList.add('hidden');
+                btn.classList.remove('bg-amber-500/20', 'text-amber-400', 'border-amber-500/40');
+            }
+        }
+
+        function renderNameInputs() {
+            const container = document.getElementById('name-inputs-container');
+            const names = state[state.mode].names;
+            container.innerHTML = names.map((name, i) => `
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400 w-16">#${i+1} Name:</span>
+                    <input type="text" value="${name}" onchange="saveName(${i}, this.value)"
+                        class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-3 py-1.5 text-xs text-white font-bold focus:outline-none focus:border-amber-400">
+                </div>
+            `).join('');
+        }
+
+        function saveName(idx, val) {
+            const clean = val.trim() || (state.mode === 'bridge' ? `Team ${idx+1}` : `Player ${idx+1}`);
+            state[state.mode].names[idx] = clean;
             saveState();
+            renderScoresAndNames();
             updateHighlight();
             renderHistory();
         }
 
-        // Update Target Score
         function updateTarget(val) {
             const num = parseInt(val);
             if (num && num > 0) {
@@ -290,163 +308,145 @@
             }
         }
 
-        // Generate Number Pad (-4 to +13 for Team, -2 to +13 for Player)
         function renderNumpad() {
             const grid = document.getElementById('numpad-grid');
+            const btns = state[state.mode].buttons;
             grid.innerHTML = '';
-            const minVal = state.mode === 'team' ? -4 : -2;
-            const maxVal = 13;
 
-            for (let i = minVal; i <= maxVal; i++) {
+            btns.forEach(num => {
                 const btn = document.createElement('button');
-                const isNegative = i < 0;
-                const isZero = i === 0;
-                const label = i > 0 ? `+${i}` : `${i}`;
+                const isNegative = num < 0;
+                const label = num > 0 ? `+${num}` : `${num}`;
 
                 let colorClass = 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/25';
                 if (isNegative) colorClass = 'bg-rose-500/15 text-rose-300 border-rose-500/30 hover:bg-rose-500/25';
-                if (isZero) colorClass = 'bg-slate-700/40 text-slate-300 border-slate-600/40 hover:bg-slate-700/60';
 
-                btn.className = `num-btn py-2.5 rounded-xl font-bold text-sm border ${colorClass}`;
+                btn.className = `py-3 rounded-xl font-bold text-sm border btn-press ${colorClass} shadow-sm`;
                 btn.innerText = label;
-                btn.onclick = () => addPoints(i);
+                btn.onclick = () => addPoints(num);
                 grid.appendChild(btn);
-            }
+            });
         }
 
-        // Add Points to Selected Team/Player
         function addPoints(pts) {
-            const currentObj = state[state.mode];
+            const current = state[state.mode];
             const idx = state.selectedIdx;
 
-            currentObj.scores[idx] += pts;
+            current.scores[idx] += pts;
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-            currentObj.history.unshift({
+            current.history.unshift({
                 entityIdx: idx,
                 points: pts,
-                newTotal: currentObj.scores[idx],
+                newTotal: current.scores[idx],
                 time: timeStr
             });
 
-            // Auto-advance selection for convenience in 4-player mode (optional smooth UX)
-            if (state.mode === 'player') {
+            if (state.mode === 'break') {
                 state.selectedIdx = (state.selectedIdx + 1) % 4;
             }
 
             saveState();
-            renderScores();
+            renderScoresAndNames();
             updateHighlight();
             renderHistory();
             checkWinner();
         }
 
-        // Undo Last Point Entry
         function undoLast() {
-            const currentObj = state[state.mode];
-            if (currentObj.history.length === 0) return;
+            const current = state[state.mode];
+            if (current.history.length === 0) return;
 
-            const lastEntry = currentObj.history.shift();
-            currentObj.scores[lastEntry.entityIdx] -= lastEntry.points;
-            state.selectedIdx = lastEntry.entityIdx;
+            const last = current.history.shift();
+            current.scores[last.entityIdx] -= last.points;
+            state.selectedIdx = last.entityIdx;
 
             saveState();
-            renderScores();
+            renderScoresAndNames();
             updateHighlight();
             renderHistory();
         }
 
-        // Render Scores & Names
-        function renderScores() {
-            // Team Mode
+        function renderScoresAndNames() {
+            // Bridge
             for (let i = 0; i < 2; i++) {
-                document.getElementById(`name-team-${i}`).value = state.team.names[i];
-                document.getElementById(`score-team-${i}`).innerText = state.team.scores[i];
+                document.getElementById(`score-bridge-${i}`).innerText = state.bridge.scores[i];
+                document.querySelectorAll(`.name-display-bridge-${i}`).forEach(el => el.innerText = state.bridge.names[i]);
             }
-            // Player Mode
+            // Break
             for (let i = 0; i < 4; i++) {
-                document.getElementById(`name-player-${i}`).value = state.player.names[i];
-                document.getElementById(`score-player-${i}`).innerText = state.player.scores[i];
+                document.getElementById(`score-break-${i}`).innerText = state.break.scores[i];
+                document.querySelectorAll(`.name-display-break-${i}`).forEach(el => el.innerText = state.break.names[i]);
             }
         }
 
-        // Highlight Active Card
         function updateHighlight() {
-            const count = state.mode === 'team' ? 2 : 4;
+            const count = state.mode === 'bridge' ? 2 : 4;
             for (let i = 0; i < count; i++) {
                 const card = document.getElementById(`card-${state.mode}-${i}`);
                 if (i === state.selectedIdx) {
-                    card.classList.add('active-card');
+                    card.classList.add('card-active');
                 } else {
-                    card.classList.remove('active-card');
+                    card.classList.remove('card-active');
                 }
             }
             const activeName = state[state.mode].names[state.selectedIdx];
-            document.getElementById('selected-indicator').innerText = `Selected: ${activeName}`;
+            document.getElementById('selected-info').innerText = `সিলেক্টেড: ${activeName}`;
         }
 
-        // Render History Log
         function renderHistory() {
             const list = document.getElementById('history-list');
-            const historyArr = state[state.mode].history;
-            const namesArr = state[state.mode].names;
+            const history = state[state.mode].history;
+            const names = state[state.mode].names;
 
-            document.getElementById('round-count').innerText = `${historyArr.length} Entries`;
+            document.getElementById('round-count').innerText = `${history.length} Entries`;
 
-            if (historyArr.length === 0) {
-                list.innerHTML = `<div class="text-center text-xs text-slate-500 py-4">এখনো কোনো পয়েন্ট যোগ করা হয়নি</div>`;
+            if (history.length === 0) {
+                list.innerHTML = `<div class="text-center text-xs text-slate-500 py-4">এখনো কোনো হিসাব যোগ করা হয়নি</div>`;
                 return;
             }
 
-            list.innerHTML = historyArr.map((item, index) => {
-                const badgeColor = item.points >= 0 
+            list.innerHTML = history.map((item, index) => {
+                const badge = item.points >= 0 
                     ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' 
                     : 'text-rose-400 bg-rose-500/10 border-rose-500/20';
                 const sign = item.points > 0 ? `+${item.points}` : item.points;
-                const entryNum = historyArr.length - index;
+                const roundNo = history.length - index;
 
                 return `
-                    <div class="flex items-center justify-between bg-slate-800/50 px-3 py-1.5 rounded-xl border border-slate-700/40 text-xs">
+                    <div class="flex items-center justify-between bg-slate-900/60 px-3 py-2 rounded-xl border border-slate-800 text-xs">
                         <div class="flex items-center gap-2">
-                            <span class="text-[10px] text-slate-500 font-mono">#${entryNum}</span>
-                            <span class="font-bold text-slate-200">${namesArr[item.entityIdx]}</span>
+                            <span class="text-[10px] text-slate-500 font-mono">#${roundNo}</span>
+                            <span class="font-bold text-slate-200">${names[item.entityIdx]}</span>
                         </div>
                         <div class="flex items-center gap-3">
-                            <span class="px-2 py-0.5 rounded-md font-bold border ${badgeColor}">${sign}</span>
-                            <span class="text-slate-400 w-12 text-right">Total: <b class="text-white">${item.newTotal}</b></span>
+                            <span class="px-2 py-0.5 rounded-lg font-bold border ${badge}">${sign}</span>
+                            <span class="text-slate-400">টোটাল: <b class="text-white font-mono">${item.newTotal}</b></span>
                         </div>
                     </div>
                 `;
             }).join('');
         }
 
-        // Check Winner against Target
         function checkWinner() {
-            const currentObj = state[state.mode];
-            for (let i = 0; i < currentObj.scores.length; i++) {
-                if (currentObj.scores[i] >= state.target) {
-                    showWinnerModal(currentObj.names[i], currentObj.scores[i]);
+            const current = state[state.mode];
+            for (let i = 0; i < current.scores.length; i++) {
+                if (current.scores[i] >= state.target) {
+                    showWinnerModal(current.names[i], current.scores[i]);
                     break;
                 }
             }
         }
 
-        function showWinnerModal(winnerName, score) {
-            document.getElementById('winner-name').innerText = `${winnerName} বিজয়ী! 🎉`;
+        function showWinnerModal(name, score) {
+            document.getElementById('winner-name').innerText = `${name} বিজয়ী! 🎉`;
             document.getElementById('winner-score').innerText = `সর্বমোট পয়েন্ট: ${score} (টার্গেট: ${state.target})`;
             const modal = document.getElementById('winner-modal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
 
-            // Trigger Confetti
             if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 120,
-                    spread: 80,
-                    origin: { y: 0.6 }
-                });
+                confetti({ particleCount: 130, spread: 90, origin: { y: 0.6 } });
             }
         }
 
@@ -456,51 +456,45 @@
             modal.classList.remove('flex');
         }
 
-        // Reset Current Mode Game
         function resetGame() {
             if (!confirm('আপনি কি বর্তমান গেমের সব স্কোর রিসেট করতে চান?')) return;
-            if (state.mode === 'team') {
-                state.team.scores = [0, 0];
-                state.team.history = [];
+            if (state.mode === 'bridge') {
+                state.bridge.scores = [0, 0];
+                state.bridge.history = [];
             } else {
-                state.player.scores = [0, 0, 0, 0];
-                state.player.history = [];
+                state.break.scores = [0, 0, 0, 0];
+                state.break.history = [];
             }
             state.selectedIdx = 0;
             saveState();
             renderAll();
         }
 
-        // Render Full UI
         function renderAll() {
-            const tabTeam = document.getElementById('tab-team');
-            const tabPlayer = document.getElementById('tab-player');
-            const boardTeam = document.getElementById('board-team');
-            const boardPlayer = document.getElementById('board-player');
+            const tabBridge = document.getElementById('tab-bridge');
+            const tabBreak = document.getElementById('tab-break');
+            const boardBridge = document.getElementById('board-bridge');
+            const boardBreak = document.getElementById('board-break');
 
-            if (state.mode === 'team') {
-                tabTeam.className = "py-2 rounded-xl font-bold text-xs sm:text-sm transition-all bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-md";
-                tabPlayer.className = "py-2 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-300 hover:text-white";
-                boardTeam.classList.remove('hidden');
-                boardTeam.classList.add('grid');
-                boardPlayer.classList.add('hidden');
-                boardPlayer.classList.remove('grid');
+            if (state.mode === 'bridge') {
+                tabBridge.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2";
+                tabBreak.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all glass-panel text-slate-300 hover:text-white flex items-center justify-center gap-2";
+                boardBridge.classList.remove('hidden');
+                boardBreak.classList.add('hidden');
             } else {
-                tabPlayer.className = "py-2 rounded-xl font-bold text-xs sm:text-sm transition-all bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-md";
-                tabTeam.className = "py-2 rounded-xl font-bold text-xs sm:text-sm transition-all text-slate-300 hover:text-white";
-                boardPlayer.classList.remove('hidden');
-                boardPlayer.classList.add('grid');
-                boardTeam.classList.add('hidden');
-                boardTeam.classList.remove('grid');
+                tabBreak.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2";
+                tabBridge.className = "py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all glass-panel text-slate-300 hover:text-white flex items-center justify-center gap-2";
+                boardBreak.classList.remove('hidden');
+                boardBridge.classList.add('hidden');
             }
 
-            renderScores();
+            renderScoresAndNames();
             renderNumpad();
             updateHighlight();
             renderHistory();
+            if(state.isEditing) renderNameInputs();
         }
 
-        // Initialize App on Load
         window.onload = loadState;
     </script>
 </body>
