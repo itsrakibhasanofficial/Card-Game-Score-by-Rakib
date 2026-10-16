@@ -113,7 +113,7 @@
         <!-- SCOREBOARD SECTION -->
         <!-- Call Bridge (2 Teams Side by Side) -->
         <div id="board-bridge" class="grid grid-cols-2 gap-3 mb-4">
-            <div id="card-bridge-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 p-4 rounded-2xl cursor-pointer transition-all shadow-sm text-center relative">
+            <div id="card-bridge-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl cursor-pointer transition-all shadow-sm text-center relative">
                 <div class="name-display-bridge-0 font-bold text-sm text-slate-800 dark:text-slate-200 mb-1 truncate">Team A</div>
                 <div id="score-bridge-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">পয়েন্ট</div>
@@ -127,7 +127,7 @@
 
         <!-- Call Break (4 Players 2x2 Grid - Side by Side top & bottom) -->
         <div id="board-break" class="hidden grid-cols-2 gap-2.5 mb-4">
-            <div id="card-break-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border-2 border-blue-600 dark:border-blue-500 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
+            <div id="card-break-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
                 <div class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 1</div>
                 <div id="score-break-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
             </div>
@@ -231,7 +231,7 @@
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibCol');
+            const saved = localStorage.getItem('cardGameScoreRakibColFix');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -241,7 +241,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibCol', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibColFix', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
@@ -413,9 +413,11 @@
             for (let i = 0; i < count; i++) {
                 const card = document.getElementById(`card-${state.mode}-${i}`);
                 if (i === state.selectedIdx) {
-                    card.className = card.className.replace(/border-slate-200 dark:border-slate-800/g, 'border-blue-600 dark:border-blue-500 border-2');
+                    card.classList.remove('border-slate-200', 'dark:border-slate-800');
+                    card.classList.add('border-blue-600', 'dark:border-blue-500', 'border-2');
                 } else {
-                    card.className = card.className.replace(/border-blue-600 dark:border-blue-500 border-2/g, 'border-slate-200 dark:border-slate-800 border');
+                    card.classList.remove('border-blue-600', 'dark:border-blue-500', 'border-2');
+                    card.classList.add('border-slate-200', 'dark:border-slate-800', 'border');
                 }
             }
             const activeName = state[state.mode].names[state.selectedIdx];
