@@ -65,8 +65,9 @@
     <div>
         <header class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl mb-4 flex items-center justify-between shadow-sm">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-xl shadow-md shadow-blue-500/20">
-                    ♠
+                <!-- Tikka / Ace Icon -->
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-black text-2xl shadow-md shadow-blue-500/20">
+                    🂡
                 </div>
                 <div>
                     <h1 class="font-extrabold text-base tracking-tight leading-tight">Card Game Score</h1>
@@ -106,7 +107,7 @@
         <div class="flex items-center justify-between mb-3 px-1">
             <span id="selected-info" class="text-xs text-blue-600 dark:text-blue-400 font-bold">সিলেক্টেড: Team A</span>
             <button onclick="toggleEditMode()" id="edit-toggle-btn" class="text-[11px] bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 font-semibold btn-press shadow-sm">
-                ✏️ Edit Names
+                ✏️ Edit Names & Icons
             </button>
         </div>
 
@@ -114,44 +115,62 @@
         <!-- Call Bridge (2 Teams Side by Side) -->
         <div id="board-bridge" class="grid grid-cols-2 gap-3 mb-4">
             <div id="card-bridge-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl cursor-pointer transition-all shadow-sm text-center relative">
-                <div class="name-display-bridge-0 font-bold text-sm text-slate-800 dark:text-slate-200 mb-1 truncate">Team A</div>
+                <div class="flex items-center justify-center gap-1.5 mb-1">
+                    <span id="avatar-bridge-0" class="text-base">♠</span>
+                    <span class="name-display-bridge-0 font-bold text-sm text-slate-800 dark:text-slate-200 truncate">Team A</span>
+                </div>
                 <div id="score-bridge-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">পয়েন্ট</div>
             </div>
             <div id="card-bridge-1" onclick="selectEntity(1)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl cursor-pointer transition-all shadow-sm text-center relative">
-                <div class="name-display-bridge-1 font-bold text-sm text-slate-800 dark:text-slate-200 mb-1 truncate">Team B</div>
+                <div class="flex items-center justify-center gap-1.5 mb-1">
+                    <span id="avatar-bridge-1" class="text-base">♥</span>
+                    <span class="name-display-bridge-1 font-bold text-sm text-slate-800 dark:text-slate-200 truncate">Team B</span>
+                </div>
                 <div id="score-bridge-1" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
                 <div class="text-[10px] text-slate-400 mt-0.5">পয়েন্ট</div>
             </div>
         </div>
 
-        <!-- Call Break (4 Players 2x2 Grid - Side by Side top & bottom) -->
+        <!-- Call Break (4 Players 2x2 Grid) -->
         <div id="board-break" class="hidden grid-cols-2 gap-2.5 mb-4">
             <div id="card-break-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
-                <div class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 1</div>
+                <div class="flex items-center justify-center gap-1 mb-1">
+                    <span id="avatar-break-0" class="text-sm">♠</span>
+                    <span class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 1</span>
+                </div>
                 <div id="score-break-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
             </div>
             <div id="card-break-1" onclick="selectEntity(1)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
-                <div class="name-display-break-1 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 2</div>
+                <div class="flex items-center justify-center gap-1 mb-1">
+                    <span id="avatar-break-1" class="text-sm">♥</span>
+                    <span class="name-display-break-1 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 2</span>
+                </div>
                 <div id="score-break-1" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
             </div>
             <div id="card-break-2" onclick="selectEntity(2)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
-                <div class="name-display-break-2 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 3</div>
+                <div class="flex items-center justify-center gap-1 mb-1">
+                    <span id="avatar-break-2" class="text-sm">♦</span>
+                    <span class="name-display-break-2 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 3</span>
+                </div>
                 <div id="score-break-2" class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono">0</div>
             </div>
             <div id="card-break-3" onclick="selectEntity(3)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
-                <div class="name-display-break-3 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 4</div>
+                <div class="flex items-center justify-center gap-1 mb-1">
+                    <span id="avatar-break-3" class="text-sm">♣</span>
+                    <span class="name-display-break-3 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 4</span>
+                </div>
                 <div id="score-break-3" class="text-3xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">0</div>
             </div>
         </div>
 
-        <!-- Name Edit Box -->
+        <!-- Name & Avatar Edit Box -->
         <div id="name-edit-box" class="bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-900 p-3.5 rounded-2xl mb-4 hidden shadow-sm">
-            <div class="text-xs font-bold text-blue-600 dark:text-blue-400 mb-2 flex items-center justify-between">
-                <span>নাম পরিবর্তন করুন:</span>
+            <div class="text-xs font-bold text-blue-600 dark:text-blue-400 mb-3 flex items-center justify-between">
+                <span>নাম ও টেক্কা (Avatar) পরিবর্তন করুন:</span>
                 <button onclick="toggleEditMode()" class="text-slate-400 hover:text-slate-600 text-xs">✕ বন্ধ করুন</button>
             </div>
-            <div id="name-inputs-container" class="space-y-2"></div>
+            <div id="name-inputs-container" class="space-y-3"></div>
         </div>
 
         <!-- NUMBER PAD SECTION (Left: Negative, Right: Positive) -->
@@ -221,6 +240,7 @@
             darkMode: false,
             bridge: {
                 names: ['Team A', 'Team B'],
+                avatars: ['♠', '♥'],
                 scores: [0, 0],
                 history: [],
                 negatives: [-4, -5, -7, -8, -9, -10],
@@ -228,6 +248,7 @@
             },
             break: {
                 names: ['Player 1', 'Player 2', 'Player 3', 'Player 4'],
+                avatars: ['♠', '♥', '♦', '♣'],
                 scores: [0, 0, 0, 0],
                 history: [],
                 negatives: [-2, -3, -4, -5, -6, -7, -8],
@@ -235,8 +256,10 @@
             }
         };
 
+        const availableAvatars = ['♠', '♥', '♦', '♣', '👑', '⭐', '🔥', '🎯'];
+
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibFinal');
+            const saved = localStorage.getItem('cardGameScoreRakibAvatar');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -246,7 +269,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibFinal', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibAvatar', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
@@ -297,11 +320,15 @@
         function renderNameInputs() {
             const container = document.getElementById('name-inputs-container');
             const names = state[state.mode].names;
+            const avatars = state[state.mode].avatars;
+
             container.innerHTML = names.map((name, i) => `
-                <div class="flex items-center gap-2">
-                    <span class="text-xs text-slate-600 dark:text-slate-400 w-16 font-medium">#${i+1} Name:</span>
+                <div class="flex items-center gap-2 bg-slate-50 dark:bg-slate-800/50 p-2 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <select onchange="saveAvatar(${i}, this.value)" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white font-bold text-sm px-2 py-1 rounded-lg border border-slate-300 dark:border-slate-600 focus:outline-none">
+                        ${availableAvatars.map(av => `<option value="${av}" ${av === avatars[i] ? 'selected' : ''}>${av}</option>`).join('')}
+                    </select>
                     <input type="text" value="${name}" onchange="saveName(${i}, this.value)"
-                        class="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-900 dark:text-white font-bold focus:outline-none focus:border-blue-600">
+                        class="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-2.5 py-1 text-xs text-slate-900 dark:text-white font-bold focus:outline-none focus:border-blue-600">
                 </div>
             `).join('');
         }
@@ -313,6 +340,12 @@
             renderScoresAndNames();
             updateHighlight();
             renderHistory();
+        }
+
+        function saveAvatar(idx, av) {
+            state[state.mode].avatars[idx] = av;
+            saveState();
+            renderScoresAndNames();
         }
 
         function updateTarget(val) {
@@ -330,14 +363,12 @@
             const data = state[state.mode];
             container.innerHTML = '';
 
-            // Left Column: Negatives
             const leftCol = document.createElement('div');
             leftCol.className = "space-y-1.5";
             data.negatives.forEach(num => {
                 leftCol.appendChild(createNumButton(num, 'rose'));
             });
 
-            // Right Column: Positives
             const rightCol = document.createElement('div');
             rightCol.className = "space-y-1.5";
             data.positives.forEach(num => {
@@ -406,10 +437,12 @@
             for (let i = 0; i < 2; i++) {
                 document.getElementById(`score-bridge-${i}`).innerText = state.bridge.scores[i];
                 document.querySelectorAll(`.name-display-bridge-${i}`).forEach(el => el.innerText = state.bridge.names[i]);
+                document.getElementById(`avatar-bridge-${i}`).innerText = state.bridge.avatars[i];
             }
             for (let i = 0; i < 4; i++) {
                 document.getElementById(`score-break-${i}`).innerText = state.break.scores[i];
                 document.querySelectorAll(`.name-display-break-${i}`).forEach(el => el.innerText = state.break.names[i]);
+                document.getElementById(`avatar-break-${i}`).innerText = state.break.avatars[i];
             }
         }
 
@@ -433,6 +466,7 @@
             const list = document.getElementById('history-list');
             const history = state[state.mode].history;
             const names = state[state.mode].names;
+            const avatars = state[state.mode].avatars;
 
             document.getElementById('round-count').innerText = `${history.length} Entries`;
 
@@ -452,7 +486,7 @@
                     <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
                         <div class="flex items-center gap-2">
                             <span class="text-[10px] text-slate-400 font-mono">#${roundNo}</span>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">${names[item.entityIdx]}</span>
+                            <span class="font-bold text-slate-800 dark:text-slate-200">${avatars[item.entityIdx]} ${names[item.entityIdx]}</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="px-2 py-0.5 rounded-lg font-bold border ${badge}">${sign}</span>
