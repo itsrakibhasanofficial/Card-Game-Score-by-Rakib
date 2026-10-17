@@ -115,65 +115,65 @@
         <div id="board-bridge" class="grid grid-cols-2 gap-3 mb-4">
             <div id="card-bridge-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl cursor-pointer transition-all shadow-sm text-center relative">
                 <div class="name-display-bridge-0 font-bold text-sm text-slate-800 dark:text-slate-200 mb-1 truncate">Team A</div>
-                <div id="score-bridge-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">পয়েন্ট</div>
+                <div id="score-bridge-0" class="text-4xl font-extrabold text-blue-600 dark:text-blue-400 font-mono my-1">0</div>
+                <div class="text-[11px] text-slate-400">পয়েন্ট</div>
             </div>
             <div id="card-bridge-1" onclick="selectEntity(1)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-2xl cursor-pointer transition-all shadow-sm text-center relative">
                 <div class="name-display-bridge-1 font-bold text-sm text-slate-800 dark:text-slate-200 mb-1 truncate">Team B</div>
-                <div id="score-bridge-1" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
-                <div class="text-[10px] text-slate-400 mt-0.5">পয়েন্ট</div>
+                <div id="score-bridge-1" class="text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono my-1">0</div>
+                <div class="text-[11px] text-slate-400">পয়েন্ট</div>
             </div>
         </div>
 
-        <!-- Call Break (4 Players 2x2 Grid with Extra Large Call Hold buttons) -->
+        <!-- Call Break (4 Players 2x2 Grid with Larger +/- Call Buttons) -->
         <div id="board-break" class="hidden grid-cols-2 gap-2.5 mb-4">
             <!-- Player 0 -->
             <div id="card-break-0" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
                 <div onclick="selectEntity(0)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 1</div>
-                    <div id="score-break-0" class="text-2xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
+                    <div id="score-break-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono my-0.5">0</div>
                 </div>
-                <!-- Call Hold Section with Extra Large +/- Buttons -->
-                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="adjustCall(0, -1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-lg btn-press">-</button>
-                    <span class="text-[11px] text-slate-500 font-medium">কল: <b id="call-break-0" class="text-blue-600 font-mono text-sm">0</b></span>
-                    <button onclick="adjustCall(0, 1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-lg btn-press">+</button>
+                <!-- Call Hold Section with Larger +/- Buttons -->
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(0, -1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-xl btn-press">-</button>
+                    <span class="text-xs text-slate-500 font-medium">কল: <b id="call-break-0" class="text-blue-600 font-mono text-base">0</b></span>
+                    <button onclick="adjustCall(0, 1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-xl btn-press">+</button>
                 </div>
             </div>
             <!-- Player 1 -->
             <div id="card-break-1" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
                 <div onclick="selectEntity(1)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-1 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 2</div>
-                    <div id="score-break-1" class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
+                    <div id="score-break-1" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono my-0.5">0</div>
                 </div>
-                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="adjustCall(1, -1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-lg btn-press">-</button>
-                    <span class="text-[11px] text-slate-500 font-medium">কল: <b id="call-break-1" class="text-emerald-600 font-mono text-sm">0</b></span>
-                    <button onclick="adjustCall(1, 1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-lg btn-press">+</button>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(1, -1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-xl btn-press">-</button>
+                    <span class="text-xs text-slate-500 font-medium">কল: <b id="call-break-1" class="text-emerald-600 font-mono text-base">0</b></span>
+                    <button onclick="adjustCall(1, 1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-xl btn-press">+</button>
                 </div>
             </div>
             <!-- Player 2 -->
             <div id="card-break-2" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
                 <div onclick="selectEntity(2)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-2 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 3</div>
-                    <div id="score-break-2" class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono">0</div>
+                    <div id="score-break-2" class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono my-0.5">0</div>
                 </div>
-                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="adjustCall(2, -1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-lg btn-press">-</button>
-                    <span class="text-[11px] text-slate-500 font-medium">কল: <b id="call-break-2" class="text-indigo-600 font-mono text-sm">0</b></span>
-                    <button onclick="adjustCall(2, 1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-lg btn-press">+</button>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(2, -1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-xl btn-press">-</button>
+                    <span class="text-xs text-slate-500 font-medium">কল: <b id="call-break-2" class="text-indigo-600 font-mono text-base">0</b></span>
+                    <button onclick="adjustCall(2, 1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-xl btn-press">+</button>
                 </div>
             </div>
             <!-- Player 3 -->
             <div id="card-break-3" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
                 <div onclick="selectEntity(3)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-3 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 4</div>
-                    <div id="score-break-3" class="text-2xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">0</div>
+                    <div id="score-break-3" class="text-3xl font-extrabold text-purple-600 dark:text-purple-400 font-mono my-0.5">0</div>
                 </div>
-                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="adjustCall(3, -1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-lg btn-press">-</button>
-                    <span class="text-[11px] text-slate-500 font-medium">কল: <b id="call-break-3" class="text-purple-600 font-mono text-sm">0</b></span>
-                    <button onclick="adjustCall(3, 1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-lg btn-press">+</button>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(3, -1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-xl btn-press">-</button>
+                    <span class="text-xs text-slate-500 font-medium">কল: <b id="call-break-3" class="text-purple-600 font-mono text-base">0</b></span>
+                    <button onclick="adjustCall(3, 1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-xl btn-press">+</button>
                 </div>
             </div>
         </div>
@@ -200,7 +200,7 @@
             </div>
             
             <!-- Dynamic Numpad Container -->
-            <div id="numpad-columns" class="grid grid-cols-2 gap-3">
+            <div id="numpad-columns" class="space-y-2">
                 <!-- Generated by JS -->
             </div>
         </div>
@@ -211,7 +211,7 @@
                 <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">📜 রাউন্ড হিস্টোরি</h3>
                 <span id="round-count" class="text-[11px] text-slate-400 font-mono">0 Rounds</span>
             </div>
-            <div id="history-list" class="max-h-40 overflow-y-auto space-y-2 pr-1">
+            <div id="history-list" class="max-h-44 overflow-y-auto space-y-2 pr-1">
                 <div class="text-center text-xs text-slate-400 py-4">এখনো কোনো রাউন্ড যোগ করা হয়নি</div>
             </div>
         </div>
@@ -272,7 +272,7 @@
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibDeptV3');
+            const saved = localStorage.getItem('cardGameScoreRakibDeptV4');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -282,7 +282,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibDeptV3', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibDeptV4', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
@@ -382,7 +382,10 @@
             if (state.mode === 'bridge') {
                 document.getElementById('numpad-title').innerText = "পয়েন্ট যোগ করুন (Team A & B)";
                 const negatives = [-4, -5, -7, -8, -9, -10];
-                const positives = [4, 5, 7, 8, 9, 10, 13];
+                const positives = [4, 5, 7, 8, 9, 10];
+
+                const grid = document.createElement('div');
+                grid.className = "grid grid-cols-2 gap-2";
 
                 const leftCol = document.createElement('div');
                 leftCol.className = "space-y-1.5";
@@ -390,15 +393,25 @@
 
                 const rightCol = document.createElement('div');
                 rightCol.className = "space-y-1.5";
-                positives.forEach(num => rightCol.appendChild(createNumButton(num, num === 13 ? 'bonus' : 'emerald')));
+                positives.forEach(num => rightCol.appendChild(createNumButton(num, 'emerald')));
 
-                container.appendChild(leftCol);
-                container.appendChild(rightCol);
+                grid.appendChild(leftCol);
+                grid.appendChild(rightCol);
+                container.appendChild(grid);
+
+                // +13 Bonus Point centered row spanning full width
+                const bonusRow = document.createElement('div');
+                bonusRow.className = "mt-2";
+                bonusRow.appendChild(createNumButton(13, 'bonus'));
+                container.appendChild(bonusRow);
+
             } else {
                 document.getElementById('numpad-title').innerText = "পয়েন্ট যোগ করুন (+ / -)";
-                // Call Break: Restored Negative and Positive buttons with green/red theme
                 const negatives = [-1, -2, -3, -4, -5, -6, -7, -8];
                 const positives = [1, 2, 3, 4, 5, 6, 7, 8];
+
+                const grid = document.createElement('div');
+                grid.className = "grid grid-cols-2 gap-2";
 
                 const leftCol = document.createElement('div');
                 leftCol.className = "space-y-1.5";
@@ -408,8 +421,9 @@
                 rightCol.className = "space-y-1.5";
                 positives.forEach(num => rightCol.appendChild(createBreakNumButton(num, 'emerald')));
 
-                container.appendChild(leftCol);
-                container.appendChild(rightCol);
+                grid.appendChild(leftCol);
+                grid.appendChild(rightCol);
+                container.appendChild(grid);
             }
         }
 
@@ -421,8 +435,12 @@
             if (type === 'rose') {
                 colorClass = 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900 hover:bg-rose-100';
             } else if (type === 'bonus') {
-                // Distinct styling and centered position for +13 Bonus Point
-                colorClass = 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200 border-amber-300 dark:border-amber-700 hover:bg-amber-200 flex items-center justify-center font-extrabold';
+                // Centered Full-Width Bonus Button
+                colorClass = 'w-full py-2.5 rounded-xl font-extrabold text-sm border btn-press bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200 border-amber-300 dark:border-amber-700 hover:bg-amber-200 shadow-sm font-mono flex items-center justify-center';
+                btn.className = colorClass;
+                btn.innerText = label;
+                btn.onclick = () => addBridgePoints(num);
+                return btn;
             }
 
             btn.className = `w-full py-2.5 rounded-xl font-bold text-sm border btn-press ${colorClass} shadow-sm font-mono`;
@@ -449,11 +467,9 @@
             const idx = state.selectedIdx;
             bridge.scores[idx] += pts;
 
-            // Prepend new round to the top of rounds array (unshift)
             bridge.rounds.unshift({
                 t1: bridge.scores[0],
-                t2: bridge.scores[1],
-                added: { idx: idx, pts: pts }
+                t2: bridge.scores[1]
             });
 
             state.selectedIdx = (state.selectedIdx + 1) % 2;
@@ -469,15 +485,18 @@
             const idx = state.selectedIdx;
 
             brk.scores[idx] += pts;
+            // Reset call to 0 for this player after input
+            brk.calls[idx] = 0;
+
             state.selectedIdx = (state.selectedIdx + 1) % 4;
 
             if (state.selectedIdx === 0) {
-                // Prepend new round to top
                 brk.rounds.unshift([...brk.scores]);
             }
 
             saveState();
             renderScoresAndNames();
+            renderCalls();
             updateHighlight();
             renderHistory();
             checkWinner();
@@ -486,15 +505,7 @@
         function undoLast() {
             const current = state[state.mode];
             if (current.rounds.length === 0) return;
-            current.rounds.shift(); // Remove the latest round from top
-            
-            // Re-calculate scores from remaining rounds
-            if (state.mode === 'bridge') {
-                state.bridge.scores = [0, 0];
-                // Recalculate totals if needed or keep simple
-            } else {
-                // Reset or reload base
-            }
+            current.rounds.shift();
             saveState();
             renderScoresAndNames();
             renderHistory();
@@ -553,21 +564,21 @@
             if (state.mode === 'bridge') {
                 const totalRounds = data.rounds.length;
                 list.innerHTML = data.rounds.map((rnd, idx) => {
-                    const roundNum = totalRounds - idx; // Display correct chronological numbering
+                    const roundNum = totalRounds - idx;
                     return `
-                        <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
-                            <div class="flex items-center justify-between mb-1">
-                                <span class="font-bold text-blue-600 dark:text-blue-400">Round ${roundNum}</span>
-                                <div class="flex gap-4 text-[10px] text-slate-500 font-semibold">
+                        <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <span class="font-extrabold text-blue-600 dark:text-blue-400 text-sm">Round ${roundNum}</span>
+                                <div class="flex gap-8 text-xs font-bold text-slate-700 dark:text-slate-300">
                                     <span>${state.bridge.names[0]}</span>
                                     <span>${state.bridge.names[1]}</span>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-between font-mono">
-                                <span class="text-slate-400 text-[10px]">পয়েন্ট হিসাব</span>
-                                <div class="flex gap-6">
-                                    <span class="font-bold text-slate-900 dark:text-white">${rnd.t1}</span>
-                                    <span class="font-bold text-slate-900 dark:text-white">${rnd.t2}</span>
+                            <div class="flex items-center justify-between font-mono pt-0.5">
+                                <span class="text-slate-400 text-[11px]">পয়েন্ট</span>
+                                <div class="flex gap-12 pr-3">
+                                    <span class="font-extrabold text-base text-slate-900 dark:text-white">${rnd.t1}</span>
+                                    <span class="font-extrabold text-base text-slate-900 dark:text-white">${rnd.t2}</span>
                                 </div>
                             </div>
                         </div>
@@ -577,14 +588,27 @@
                 const totalRounds = data.rounds.length;
                 list.innerHTML = data.rounds.map((scores, idx) => {
                     const roundNum = totalRounds - idx;
+                    const names = state.break.names;
                     return `
-                        <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
-                            <div class="font-bold text-blue-600 dark:text-blue-400 mb-1">Round ${roundNum}</div>
-                            <div class="grid grid-cols-2 gap-1 text-[11px] font-mono text-slate-600 dark:text-slate-300">
-                                <div>${state.break.names[0]}: ${scores[0]}</div>
-                                <div>${state.break.names[1]}: ${scores[1]}</div>
-                                <div>${state.break.names[2]}: ${scores[2]}</div>
-                                <div>${state.break.names[3]}: ${scores[3]}</div>
+                        <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+                            <div class="font-extrabold text-blue-600 dark:text-blue-400 text-sm mb-2">Round ${roundNum}</div>
+                            <div class="grid grid-cols-4 gap-1 text-center font-mono">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[10px] text-slate-500 font-bold truncate w-full">${names[0]}</span>
+                                    <span class="text-sm font-extrabold ${scores[0] >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">${scores[0] > 0 ? '+' + scores[0] : scores[0]}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[10px] text-slate-500 font-bold truncate w-full">${names[1]}</span>
+                                    <span class="text-sm font-extrabold ${scores[1] >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">${scores[1] > 0 ? '+' + scores[1] : scores[1]}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[10px] text-slate-500 font-bold truncate w-full">${names[2]}</span>
+                                    <span class="text-sm font-extrabold ${scores[2] >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">${scores[2] > 0 ? '+' + scores[2] : scores[2]}</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[10px] text-slate-500 font-bold truncate w-full">${names[3]}</span>
+                                    <span class="text-sm font-extrabold ${scores[3] >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}">${scores[3] > 0 ? '+' + scores[3] : scores[3]}</span>
+                                </div>
                             </div>
                         </div>
                     `;
