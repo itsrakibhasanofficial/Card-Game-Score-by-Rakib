@@ -228,7 +228,7 @@
         </div>
     </footer>
 
-    <!-- CUSTOM CONFIRM RESET MODAL (Removes Browser URL Warning) -->
+    <!-- CUSTOM CONFIRM RESET MODAL -->
     <div id="confirm-modal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-xs w-full text-center shadow-2xl">
             <div class="text-4xl mb-2">⚠️</div>
@@ -274,7 +274,7 @@
             bridge: {
                 names: ['Team A', 'Team B'],
                 scores: [0, 0],
-                rounds: [] 
+                rounds: [] // Stores { t1: addedPts, t2: addedPts } per round
             },
             break: {
                 names: ['Player 1', 'Player 2', 'Player 3', 'Player 4'],
@@ -285,7 +285,7 @@
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibDeptV5');
+            const saved = localStorage.getItem('cardGameScoreRakibDeptV6');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -295,7 +295,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibDeptV5', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibDeptV6', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
@@ -477,12 +477,20 @@
             const idx = state.selectedIdx;
             bridge.scores[idx] += pts;
 
-            bridge.rounds.unshift({
-                t1: bridge.scores[0],
-                t2: bridge.scores[1]
-            });
+            // To track individual round entries for Team A and Team B turn-by-turn
+            if (state.selectedIdx === 0) {
+                bridge.tempRound = { t1: pts, t2: null };
+                state.selectedIdx = 1;
+            } else {
+                if (!bridge.tempRound) bridge.tempRound = { t1: 0, t2: pts };
+                else bridge.tempRound.t2 = pts;
 
-            state.selectedIdx = (state.selectedIdx + 1) % 2;
+                // Push completed round pair to top
+                bridge.rounds.unshift(bridge.tempRound);
+                bridge.tempRound = null;
+                state.selectedIdx = 0;
+            }
+
             saveState();
             renderScoresAndNames();
             updateHighlight();
@@ -495,7 +503,7 @@
             const idx = state.selectedIdx;
 
             brk.scores[idx] += pts;
-            brk.calls[idx] = 0; // Reset call to 0 after data input
+            brk.calls[idx] = 0; 
 
             state.selectedIdx = (state.selectedIdx + 1) % 4;
 
@@ -574,6 +582,14 @@
                 const totalRounds = data.rounds.length;
                 list.innerHTML = data.rounds.map((rnd, idx) => {
                     const roundNum = totalRounds - idx;
+                    const t1Val = rnd.t1 !== null && rnd.t1 !== undefined ? rnd.t1 : 0;
+                    const t2Val = rnd.t2 !== null && rnd.t2 !== undefined ? rnd.t2 : 0;
+                    
+                    const t1Color = t1Val >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400';
+                    const t2Color = t2Val >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400';
+                    const t1Str = t1Val > 0 ? `+${t1Val}` : `${t1Val}`;
+                    const t2Str = t2Val > 0 ? `+${t2Val}` : `${t2Val}`;
+
                     return `
                         <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
                             <div class="flex items-center justify-between mb-1.5">
@@ -584,10 +600,10 @@
                                 </div>
                             </div>
                             <div class="flex items-center justify-between font-mono pt-0.5">
-                                <span class="text-slate-400 text-[11px]">পয়েন্ট</span>
+                                <span class="text-slate-400 text-[11px]">পয়েন্ট পরিবর্তন</span>
                                 <div class="flex gap-12 pr-3">
-                                    <span class="font-extrabold text-base text-slate-900 dark:text-white">${rnd.t1}</span>
-                                    <span class="font-extrabold text-base text-slate-900 dark:text-white">${rnd.t2}</span>
+                                    <span class="font-extrabold text-base ${t1Color}">${t1Str}</span>
+                                    <span class="font-extrabold text-base ${t2Color}">${t2Str}</span>
                                 </div>
                             </div>
                         </div>
@@ -653,7 +669,6 @@
             modal.classList.remove('flex');
         }
 
-        // Custom Reset Modal Handlers
         function confirmReset() {
             const modal = document.getElementById('confirm-modal');
             modal.classList.remove('hidden');
@@ -670,6 +685,7 @@
             if (state.mode === 'bridge') {
                 state.bridge.scores = [0, 0];
                 state.bridge.rounds = [];
+                state.bridge.tempRound = null;
             } else {
                 state.break.scores = [0, 0, 0, 0];
                 state.break.calls = [0, 0, 0, 0];
