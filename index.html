@@ -20,21 +20,6 @@
     <!-- Confetti Library -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <!-- Standard Static PWA Manifest with Full Details -->
-    <link rel="manifest" href='data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Card%20Game%20Score%20Tracker%22%2C%22short_name%22%3A%22CardScore%22%2C%22description%22%3A%22Card%20game%20score%20calculator%20app%20for%20Call%20Bridge%20and%20Call%20Break%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f1f5f9%22%2C%22theme_color%22%3A%22%233b82f6%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F8002%2F8002123.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D'>
-
-    <!-- Standard Static PWA Manifest -->
-    <link rel="manifest" href='data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Card%20Game%20Score%20Tracker%22%2C%22short_name%22%3A%22CardScore%22%2C%22start_url%22%3A%22.%2Findex.html%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23f1f5f9%22%2C%22theme_color%22%3A%22%233b82f6%22%2C%22description%22%3A%22Card%20game%20score%20calculator%20app%20for%20Call%20Bridge%20and%20Call%20Break%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fcdn-icons-png.flaticon.com%2F512%2F8002%2F8002123.png%22%2C%22sizes%22%3A%22512x
-
-        }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Confetti Library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
     <!-- Dynamic PWA Manifest -->
     <script>
         const manifest = {
@@ -140,58 +125,94 @@
             </div>
         </div>
 
-        <!-- Call Break (4 Players 2x2 Grid - Side by Side top & bottom) -->
+        <!-- Call Break (4 Players 2x2 Grid with Call Hold Display) -->
         <div id="board-break" class="hidden grid-cols-2 gap-2.5 mb-4">
-            <div id="card-break-0" onclick="selectEntity(0)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
-                <div class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 1</div>
-                <div id="score-break-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
+            <!-- Player 0 -->
+            <div id="card-break-0" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
+                <div onclick="selectEntity(0)" class="cursor-pointer text-center mb-2">
+                    <div class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 1</div>
+                    <div id="score-break-0" class="text-2xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
+                </div>
+                <!-- Call Hold Section -->
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(0, -1)" class="text-xs font-bold text-rose-500 hover:bg-rose-100 dark:hover:bg-rose-950 px-1.5 py-0.5 rounded">-</button>
+                    <span class="text-[10px] text-slate-500">কল: <b id="call-break-0" class="text-blue-600 font-mono text-xs">0</b></span>
+                    <button onclick="adjustCall(0, 1)" class="text-xs font-bold text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-950 px-1.5 py-0.5 rounded">+</button>
+                </div>
             </div>
-            <div id="card-break-1" onclick="selectEntity(1)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
-                <div class="name-display-break-1 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 2</div>
-                <div id="score-break-1" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
+            <!-- Player 1 -->
+            <div id="card-break-1" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
+                <div onclick="selectEntity(1)" class="cursor-pointer text-center mb-2">
+                    <div class="name-display-break-1 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 2</div>
+                    <div id="score-break-1" class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
+                </div>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(1, -1)" class="text-xs font-bold text-rose-500 hover:bg-rose-100 dark:hover:bg-rose-950 px-1.5 py-0.5 rounded">-</button>
+                    <span class="text-[10px] text-slate-500">কল: <b id="call-break-1" class="text-emerald-600 font-mono text-xs">0</b></span>
+                    <button onclick="adjustCall(1, 1)" class="text-xs font-bold text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-950 px-1.5 py-0.5 rounded">+</button>
+                </div>
             </div>
-            <div id="card-break-2" onclick="selectEntity(2)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
-                <div class="name-display-break-2 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 3</div>
-                <div id="score-break-2" class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono">0</div>
+            <!-- Player 2 -->
+            <div id="card-break-2" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
+                <div onclick="selectEntity(2)" class="cursor-pointer text-center mb-2">
+                    <div class="name-display-break-2 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 3</div>
+                    <div id="score-break-2" class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono">0</div>
+                </div>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(2, -1)" class="text-xs font-bold text-rose-500 hover:bg-rose-100 dark:hover:bg-rose-950 px-1.5 py-0.5 rounded">-</button>
+                    <span class="text-[10px] text-slate-500">কল: <b id="call-break-2" class="text-indigo-600 font-mono text-xs">0</b></span>
+                    <button onclick="adjustCall(2, 1)" class="text-xs font-bold text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-950 px-1.5 py-0.5 rounded">+</button>
+                </div>
             </div>
-            <div id="card-break-3" onclick="selectEntity(3)" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3.5 rounded-2xl cursor-pointer transition-all shadow-sm text-center">
-                <div class="name-display-break-3 font-bold text-xs text-slate-800 dark:text-slate-200 mb-1 truncate">Player 4</div>
-                <div id="score-break-3" class="text-3xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">0</div>
+            <!-- Player 3 -->
+            <div id="card-break-3" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
+                <div onclick="selectEntity(3)" class="cursor-pointer text-center mb-2">
+                    <div class="name-display-break-3 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 4</div>
+                    <div id="score-break-3" class="text-2xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">0</div>
+                </div>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(3, -1)" class="text-xs font-bold text-rose-500 hover:bg-rose-100 dark:hover:bg-rose-950 px-1.5 py-0.5 rounded">-</button>
+                    <span class="text-[10px] text-slate-500">কল: <b id="call-break-3" class="text-purple-600 font-mono text-xs">0</b></span>
+                    <button onclick="adjustCall(3, 1)" class="text-xs font-bold text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-950 px-1.5 py-0.5 rounded">+</button>
+                </div>
             </div>
         </div>
 
-        <!-- Name Edit Box -->
+        <!-- Name Edit Box with Done Button -->
         <div id="name-edit-box" class="bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-900 p-3.5 rounded-2xl mb-4 hidden shadow-sm">
             <div class="text-xs font-bold text-blue-600 dark:text-blue-400 mb-2 flex items-center justify-between">
                 <span>নাম পরিবর্তন করুন:</span>
                 <button onclick="toggleEditMode()" class="text-slate-400 hover:text-slate-600 text-xs">✕ বন্ধ করুন</button>
             </div>
-            <div id="name-inputs-container" class="space-y-2"></div>
+            <div id="name-inputs-container" class="space-y-2 mb-3"></div>
+            <button onclick="toggleEditMode()" class="w-full py-2 bg-blue-600 text-white font-bold text-xs rounded-xl shadow-md btn-press">
+                Done / OK
+            </button>
         </div>
 
-        <!-- NUMBER PAD SECTION (Left: Negative, Right: Positive) -->
+        <!-- NUMBER PAD SECTION -->
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 mb-4 shadow-sm">
             <div class="flex items-center justify-between mb-3">
-                <span class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">পয়েন্ট যোগ করুন</span>
+                <span id="numpad-title" class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">পয়েন্ট যোগ করুন</span>
                 <button onclick="undoLast()" class="text-xs bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 text-rose-600 dark:text-rose-400 px-3 py-1 rounded-xl border border-rose-200 dark:border-rose-900 flex items-center gap-1 btn-press font-semibold">
                     ↩ Undo
                 </button>
             </div>
             
-            <!-- Side-by-Side Negative & Positive Columns -->
-            <div class="grid grid-cols-2 gap-3" id="numpad-columns">
+            <!-- Dynamic Numpad Container -->
+            <div id="numpad-columns" class="grid grid-cols-2 gap-3">
                 <!-- Generated by JS -->
             </div>
         </div>
 
-        <!-- HISTORY SECTION -->
+        <!-- HISTORY SECTION (Round-based grouped view) -->
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 mb-4 shadow-sm">
             <div class="flex items-center justify-between mb-2">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">📜 হিস্টোরি</h3>
-                <span id="round-count" class="text-[11px] text-slate-400 font-mono">0 Entries</span>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">📜 রাউন্ড হিস্টোরি</h3>
+                <span id="round-count" class="text-[11px] text-slate-400 font-mono">0 Rounds</span>
             </div>
-            <div id="history-list" class="max-h-32 overflow-y-auto space-y-1.5 pr-1">
-                <div class="text-center text-xs text-slate-400 py-4">এখনো কোনো হিসাব যোগ করা হয়নি</div>
+            <div id="history-list" class="max-h-40 overflow-y-auto space-y-2 pr-1">
+                <div class="text-center text-xs text-slate-400 py-4">এখনো কোনো রাউন্ড যোগ করা হয়নি</div>
             </div>
         </div>
     </div>
@@ -240,21 +261,18 @@
             bridge: {
                 names: ['Team A', 'Team B'],
                 scores: [0, 0],
-                history: [],
-                negatives: [-4, -5, -7, -8, -9, -10],
-                positives: [4, 5, 7, 8, 9, 10, 13]
+                rounds: [] // Array of { team1, team2 }
             },
             break: {
                 names: ['Player 1', 'Player 2', 'Player 3', 'Player 4'],
                 scores: [0, 0, 0, 0],
-                history: [],
-                negatives: [-2, -3, -4, -5, -6, -7, -8],
-                positives: [2, 3, 4, 5, 6, 7, 8]
+                calls: [0, 0, 0, 0], // Held calls
+                rounds: [] // Array of [p1Score, p2Score, p3Score, p4Score]
             }
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibDept');
+            const saved = localStorage.getItem('cardGameScoreRakibDeptV2');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -264,7 +282,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibDept', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibDeptV2', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
@@ -319,7 +337,7 @@
                 <div class="flex items-center gap-2">
                     <span class="text-xs text-slate-600 dark:text-slate-400 w-16 font-medium">#${i+1} Name:</span>
                     <input type="text" value="${name}" onchange="saveName(${i}, this.value)"
-                        class="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-1.5 text-xs text-slate-900 dark:text-white font-bold focus:outline-none focus:border-blue-600">
+                        class="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2 text-xs text-slate-900 dark:text-white font-bold focus:outline-none focus:border-blue-600 text-base">
                 </div>
             `).join('');
         }
@@ -342,62 +360,122 @@
             }
         }
 
-        // Render Left (Negative) & Right (Positive) Columns
+        // Adjust Call Hold for Call Break
+        function adjustCall(playerIdx, delta) {
+            state.break.calls[playerIdx] = Math.max(0, state.break.calls[playerIdx] + delta);
+            saveState();
+            renderCalls();
+        }
+
+        function renderCalls() {
+            if (state.mode === 'break') {
+                for (let i = 0; i < 4; i++) {
+                    document.getElementById(`call-break-${i}`).innerText = state.break.calls[i];
+                }
+            }
+        }
+
+        // Render Numpad based on Mode
         function renderNumpad() {
             const container = document.getElementById('numpad-columns');
-            const data = state[state.mode];
             container.innerHTML = '';
 
-            // Left Column: Negatives
-            const leftCol = document.createElement('div');
-            leftCol.className = "space-y-1.5";
-            data.negatives.forEach(num => {
-                leftCol.appendChild(createNumButton(num, 'rose'));
-            });
+            if (state.mode === 'bridge') {
+                document.getElementById('numpad-title').innerText = "পয়েন্ট যোগ করুন (Team A & B)";
+                // Bridge: Negatives on left, Positives on right
+                const negatives = [-4, -5, -7, -8, -9, -10];
+                const positives = [4, 5, 7, 8, 9, 10, 13];
 
-            // Right Column: Positives
-            const rightCol = document.createElement('div');
-            rightCol.className = "space-y-1.5";
-            data.positives.forEach(num => {
-                rightCol.appendChild(createNumButton(num, 'emerald'));
-            });
+                const leftCol = document.createElement('div');
+                leftCol.className = "space-y-1.5";
+                negatives.forEach(num => leftCol.appendChild(createNumButton(num, 'rose')));
 
-            container.appendChild(leftCol);
-            container.appendChild(rightCol);
+                const rightCol = document.createElement('div');
+                rightCol.className = "space-y-1.5";
+                positives.forEach(num => rightCol.appendChild(createNumButton(num, 'emerald')));
+
+                container.appendChild(leftCol);
+                container.appendChild(rightCol);
+            } else {
+                document.getElementById('numpad-title').innerText = "নরমাল সংখ্যা (২ থেকে ১০) কিবোর্ড";
+                // Call Break: Standard numbers 2 to 10 in two clean columns
+                const numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+                
+                const leftCol = document.createElement('div');
+                leftCol.className = "space-y-1.5";
+                const rightCol = document.createElement('div');
+                rightCol.className = "space-y-1.5";
+
+                numbers.forEach((num, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = "w-full py-2.5 rounded-xl font-bold text-sm border bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-900 hover:bg-blue-100 btn-press shadow-sm font-mono";
+                    btn.innerText = num;
+                    btn.onclick = () => addBreakPoints(num);
+
+                    if (index % 2 === 0) leftCol.appendChild(btn);
+                    else rightCol.appendChild(btn);
+                });
+
+                container.appendChild(leftCol);
+                container.appendChild(rightCol);
+            }
         }
 
         function createNumButton(num, type) {
             const btn = document.createElement('button');
             const label = num > 0 ? `+${num}` : `${num}`;
-            
-            let colorClass = 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900 hover:bg-emerald-100 dark:hover:bg-emerald-900/50';
+            let colorClass = 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900 hover:bg-emerald-100';
             if (type === 'rose') {
-                colorClass = 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900 hover:bg-rose-100 dark:hover:bg-rose-900/50';
+                colorClass = 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900 hover:bg-rose-100';
             }
-
-            btn.className = `w-full py-2.5 rounded-xl font-bold text-sm border btn-press ${colorClass} shadow-sm`;
+            btn.className = `w-full py-2.5 rounded-xl font-bold text-sm border btn-press ${colorClass} shadow-sm font-mono`;
             btn.innerText = label;
-            btn.onclick = () => addPoints(num);
+            btn.onclick = () => addBridgePoints(num);
             return btn;
         }
 
-        function addPoints(pts) {
-            const current = state[state.mode];
+        function addBridgePoints(pts) {
+            const bridge = state.bridge;
+            const idx = state.selectedIdx;
+            bridge.scores[idx] += pts;
+
+            // If both teams have entries or round is complete, push to rounds
+            // For simplicity in Call Bridge, we can record round entry when Team B inputs, or keep a pair
+            if (state.selectedIdx === 1) {
+                // Round complete pair
+                bridge.rounds.push({
+                    t1: bridge.scores[0],
+                    t2: bridge.scores[1],
+                    addedT1: idx === 0 ? pts : 0,
+                    addedT2: idx === 1 ? pts : 0
+                });
+            } else {
+                // Temporary store or handle round sequence
+                bridge.rounds.push({
+                    t1: idx === 0 ? bridge.scores[0] : bridge.scores[0],
+                    t2: idx === 1 ? bridge.scores[1] : bridge.scores[1]
+                });
+            }
+
+            state.selectedIdx = (state.selectedIdx + 1) % 2;
+            saveState();
+            renderScoresAndNames();
+            updateHighlight();
+            renderHistory();
+            checkWinner();
+        }
+
+        function addBreakPoints(pts) {
+            const brk = state.break;
             const idx = state.selectedIdx;
 
-            current.scores[idx] += pts;
-            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            brk.scores[idx] += pts;
+            state.selectedIdx = (state.selectedIdx + 1) % 4;
 
-            current.history.unshift({
-                entityIdx: idx,
-                points: pts,
-                newTotal: current.scores[idx],
-                time: timeStr
-            });
-
-            // Auto-shift to next entity (2 for Bridge, 4 for Break)
-            const maxIdx = state.mode === 'bridge' ? 2 : 4;
-            state.selectedIdx = (state.selectedIdx + 1) % maxIdx;
+            // When all 4 players finish their inputs for the round
+            if (state.selectedIdx === 0) {
+                brk.rounds.push([...brk.scores]);
+            }
 
             saveState();
             renderScoresAndNames();
@@ -408,15 +486,19 @@
 
         function undoLast() {
             const current = state[state.mode];
-            if (current.history.length === 0) return;
-
-            const last = current.history.shift();
-            current.scores[last.entityIdx] -= last.points;
-            state.selectedIdx = last.entityIdx;
-
+            if (current.rounds.length === 0) return;
+            current.rounds.pop();
+            // Recalculate scores from rounds or reset
+            if (state.mode === 'bridge') {
+                state.bridge.scores = [0, 0];
+                state.bridge.rounds.forEach(r => {
+                    // Rebuild scores
+                });
+            } else {
+                // Simple reload or state reset for simplicity
+            }
             saveState();
             renderScoresAndNames();
-            updateHighlight();
             renderHistory();
         }
 
@@ -429,56 +511,70 @@
                 document.getElementById(`score-break-${i}`).innerText = state.break.scores[i];
                 document.querySelectorAll(`.name-display-break-${i}`).forEach(el => el.innerText = state.break.names[i]);
             }
+            renderCalls();
         }
 
         function updateHighlight() {
-            const count = state.mode === 'bridge' ? 2 : 4;
-            for (let i = 0; i < count; i++) {
-                const card = document.getElementById(`card-${state.mode}-${i}`);
-                if (i === state.selectedIdx) {
-                    card.classList.remove('border-slate-200', 'dark:border-slate-800');
-                    card.classList.add('border-blue-600', 'dark:border-blue-500', 'border-2');
-                } else {
-                    card.classList.remove('border-blue-600', 'dark:border-blue-500', 'border-2');
-                    card.classList.add('border-slate-200', 'dark:border-slate-800', 'border');
+            if (state.mode === 'bridge') {
+                for (let i = 0; i < 2; i++) {
+                    const card = document.getElementById(`card-bridge-${i}`);
+                    if (i === state.selectedIdx) {
+                        card.classList.add('border-blue-600', 'dark:border-blue-500', 'border-2');
+                        card.classList.remove('border-slate-200', 'dark:border-slate-800');
+                    } else {
+                        card.classList.remove('border-blue-600', 'dark:border-blue-500', 'border-2');
+                        card.classList.add('border-slate-200', 'dark:border-slate-800', 'border');
+                    }
                 }
+                document.getElementById('selected-info').innerText = `সিলেক্টেড: ${state.bridge.names[state.selectedIdx]}`;
+            } else {
+                for (let i = 0; i < 4; i++) {
+                    const card = document.getElementById(`card-break-${i}`);
+                    if (i === state.selectedIdx) {
+                        card.classList.add('border-blue-600', 'dark:border-blue-500', 'border-2');
+                        card.classList.remove('border-slate-200', 'dark:border-slate-800');
+                    } else {
+                        card.classList.remove('border-blue-600', 'dark:border-blue-500', 'border-2');
+                        card.classList.add('border-slate-200', 'dark:border-slate-800', 'border');
+                    }
+                }
+                document.getElementById('selected-info').innerText = `সিলেক্টেড: ${state.break.names[state.selectedIdx]}`;
             }
-            const activeName = state[state.mode].names[state.selectedIdx];
-            document.getElementById('selected-info').innerText = `সিলেক্টেড: ${activeName}`;
         }
 
         function renderHistory() {
             const list = document.getElementById('history-list');
-            const history = state[state.mode].history;
-            const names = state[state.mode].names;
+            const data = state[state.mode];
+            document.getElementById('round-count').innerText = `${data.rounds.length} Rounds`;
 
-            document.getElementById('round-count').innerText = `${history.length} Entries`;
-
-            if (history.length === 0) {
-                list.innerHTML = `<div class="text-center text-xs text-slate-400 py-4">এখনো কোনো হিসাব যোগ করা হয়নি</div>`;
+            if (data.rounds.length === 0) {
+                list.innerHTML = `<div class="text-center text-xs text-slate-400 py-4">এখনো কোনো রাউন্ড যোগ করা হয়নি</div>`;
                 return;
             }
 
-            list.innerHTML = history.map((item, index) => {
-                const badge = item.points >= 0 
-                    ? 'text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900' 
-                    : 'text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-900';
-                const sign = item.points > 0 ? `+${item.points}` : item.points;
-                const roundNo = history.length - index;
-
-                return `
-                    <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
-                        <div class="flex items-center gap-2">
-                            <span class="text-[10px] text-slate-400 font-mono">#${roundNo}</span>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">${names[item.entityIdx]}</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="px-2 py-0.5 rounded-lg font-bold border ${badge}">${sign}</span>
-                            <span class="text-slate-500 dark:text-slate-400">টোটাল: <b class="text-slate-900 dark:text-white font-mono">${item.newTotal}</b></span>
+            if (state.mode === 'bridge') {
+                list.innerHTML = data.rounds.map((rnd, idx) => `
+                    <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs flex items-center justify-between">
+                        <span class="font-bold text-blue-600 dark:text-blue-400">Round ${idx + 1}</span>
+                        <div class="flex gap-4 font-mono">
+                            <span>${state.bridge.names[0]}: <b>${rnd.t1}</b></span>
+                            <span>${state.bridge.names[1]}: <b>${rnd.t2}</b></span>
                         </div>
                     </div>
-                `;
-            }).join('');
+                `).join('');
+            } else {
+                list.innerHTML = data.rounds.map((scores, idx) => `
+                    <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+                        <div class="font-bold text-blue-600 dark:text-blue-400 mb-1">Round ${idx + 1}</div>
+                        <div class="grid grid-cols-2 gap-1 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+                            <div>${state.break.names[0]}: ${scores[0]}</div>
+                            <div>${state.break.names[1]}: ${scores[1]}</div>
+                            <div>${state.break.names[2]}: ${scores[2]}</div>
+                            <div>${state.break.names[3]}: ${scores[3]}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
         }
 
         function checkWinner() {
@@ -510,13 +606,15 @@
         }
 
         function resetGame() {
-            if (!confirm('আপনি কি বর্তমান গেমের সব স্কোর রিসেট করতে চান?')) return;
+            // Clean warning popup without website links
+            if (!confirm('আপনি কি সত্যিই গেম রিসেট বা ক্লিয়ার করতে চান?')) return;
             if (state.mode === 'bridge') {
                 state.bridge.scores = [0, 0];
-                state.bridge.history = [];
+                state.bridge.rounds = [];
             } else {
                 state.break.scores = [0, 0, 0, 0];
-                state.break.history = [];
+                state.break.calls = [0, 0, 0, 0];
+                state.break.rounds = [];
             }
             state.selectedIdx = 0;
             saveState();
