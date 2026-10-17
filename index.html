@@ -125,13 +125,13 @@
             </div>
         </div>
 
-        <!-- Call Break -->
+        <!-- Call Break (Increased Main Score Font Size) -->
         <div id="board-break" class="hidden grid-cols-2 gap-2.5 mb-4">
             <!-- Player 0 -->
             <div id="card-break-0" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
                 <div onclick="selectEntity(0)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 1</div>
-                    <div id="score-break-0" class="text-3xl font-extrabold text-blue-600 dark:text-blue-400 font-mono my-0.5">0</div>
+                    <div id="score-break-0" class="text-4xl font-extrabold text-blue-600 dark:text-blue-400 font-mono my-1">0</div>
                 </div>
                 <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
                     <button onclick="adjustCall(0, -1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-xl btn-press">-</button>
@@ -143,7 +143,7 @@
             <div id="card-break-1" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
                 <div onclick="selectEntity(1)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-1 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 2</div>
-                    <div id="score-break-1" class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono my-0.5">0</div>
+                    <div id="score-break-1" class="text-4xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono my-1">0</div>
                 </div>
                 <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
                     <button onclick="adjustCall(1, -1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-xl btn-press">-</button>
@@ -155,7 +155,7 @@
             <div id="card-break-2" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
                 <div onclick="selectEntity(2)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-2 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 3</div>
-                    <div id="score-break-2" class="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono my-0.5">0</div>
+                    <div id="score-break-2" class="text-4xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono my-1">0</div>
                 </div>
                 <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
                     <button onclick="adjustCall(2, -1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-xl btn-press">-</button>
@@ -167,7 +167,7 @@
             <div id="card-break-3" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
                 <div onclick="selectEntity(3)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-3 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 4</div>
-                    <div id="score-break-3" class="text-3xl font-extrabold text-purple-600 dark:text-purple-400 font-mono my-0.5">0</div>
+                    <div id="score-break-3" class="text-4xl font-extrabold text-purple-600 dark:text-purple-400 font-mono my-1">0</div>
                 </div>
                 <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
                     <button onclick="adjustCall(3, -1)" class="w-9 h-9 flex items-center justify-center text-xl font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-xl btn-press">-</button>
@@ -274,7 +274,7 @@
             bridge: {
                 names: ['Team A', 'Team B'],
                 scores: [0, 0],
-                rounds: [] // Stores { t1: addedPts, t2: addedPts } per round
+                rounds: [] 
             },
             break: {
                 names: ['Player 1', 'Player 2', 'Player 3', 'Player 4'],
@@ -285,7 +285,7 @@
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibDeptV6');
+            const saved = localStorage.getItem('cardGameScoreRakibDeptV7');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -295,7 +295,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibDeptV6', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibDeptV7', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
@@ -477,7 +477,6 @@
             const idx = state.selectedIdx;
             bridge.scores[idx] += pts;
 
-            // To track individual round entries for Team A and Team B turn-by-turn
             if (state.selectedIdx === 0) {
                 bridge.tempRound = { t1: pts, t2: null };
                 state.selectedIdx = 1;
@@ -485,7 +484,6 @@
                 if (!bridge.tempRound) bridge.tempRound = { t1: 0, t2: pts };
                 else bridge.tempRound.t2 = pts;
 
-                // Push completed round pair to top
                 bridge.rounds.unshift(bridge.tempRound);
                 bridge.tempRound = null;
                 state.selectedIdx = 0;
