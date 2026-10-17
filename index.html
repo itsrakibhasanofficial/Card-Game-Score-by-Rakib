@@ -263,32 +263,8 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC & OFFLINE SERVICE WORKER -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Register Service Worker for Offline Support
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                self.addEventListener('install', (e) => {
-                    self.skipWaiting();
-                });
-                self.addEventListener('activate', (e) => {
-                    e.waitUntil(clients.claim());
-                });
-                self.addEventListener('fetch', (e) => {
-                    e.respondWith(
-                        caches.match(e.request).then((response) => {
-                            return response || fetch(e.request).catch(() => {
-                                // Fallback if offline and resource not cached
-                            });
-                        })
-                    );
-                });
-            `;
-            const swBlob = new Blob([swCode], { type: 'text/javascript' });
-            const swUrl = URL.createObjectURL(swBlob);
-            navigator.serviceWorker.register(swUrl).catch(err => console.log('SW registration failed', err));
-        }
-
         let state = {
             mode: 'bridge',
             selectedIdx: 0,
@@ -309,7 +285,7 @@
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibDeptV8');
+            const saved = localStorage.getItem('cardGameScoreRakibDeptV9');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -319,7 +295,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibDeptV8', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibDeptV9', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
