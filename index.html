@@ -125,55 +125,55 @@
             </div>
         </div>
 
-        <!-- Call Break (4 Players 2x2 Grid with Call Hold Display) -->
+        <!-- Call Break (4 Players 2x2 Grid with Extra Large Call Hold buttons) -->
         <div id="board-break" class="hidden grid-cols-2 gap-2.5 mb-4">
             <!-- Player 0 -->
             <div id="card-break-0" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
-                <div onclick="selectEntity(0)" class="cursor-pointer text-center mb-2">
+                <div onclick="selectEntity(0)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-0 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 1</div>
                     <div id="score-break-0" class="text-2xl font-extrabold text-blue-600 dark:text-blue-400 font-mono">0</div>
                 </div>
-                <!-- Call Hold Section -->
-                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="adjustCall(0, -1)" class="text-xs font-bold text-rose-500 hover:bg-rose-100 dark:hover:bg-rose-950 px-1.5 py-0.5 rounded">-</button>
-                    <span class="text-[10px] text-slate-500">কল: <b id="call-break-0" class="text-blue-600 font-mono text-xs">0</b></span>
-                    <button onclick="adjustCall(0, 1)" class="text-xs font-bold text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-950 px-1.5 py-0.5 rounded">+</button>
+                <!-- Call Hold Section with Extra Large +/- Buttons -->
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(0, -1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-lg btn-press">-</button>
+                    <span class="text-[11px] text-slate-500 font-medium">কল: <b id="call-break-0" class="text-blue-600 font-mono text-sm">0</b></span>
+                    <button onclick="adjustCall(0, 1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-lg btn-press">+</button>
                 </div>
             </div>
             <!-- Player 1 -->
             <div id="card-break-1" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
-                <div onclick="selectEntity(1)" class="cursor-pointer text-center mb-2">
+                <div onclick="selectEntity(1)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-1 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 2</div>
                     <div id="score-break-1" class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">0</div>
                 </div>
-                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="adjustCall(1, -1)" class="text-xs font-bold text-rose-500 hover:bg-rose-100 dark:hover:bg-rose-950 px-1.5 py-0.5 rounded">-</button>
-                    <span class="text-[10px] text-slate-500">কল: <b id="call-break-1" class="text-emerald-600 font-mono text-xs">0</b></span>
-                    <button onclick="adjustCall(1, 1)" class="text-xs font-bold text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-950 px-1.5 py-0.5 rounded">+</button>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(1, -1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-lg btn-press">-</button>
+                    <span class="text-[11px] text-slate-500 font-medium">কল: <b id="call-break-1" class="text-emerald-600 font-mono text-sm">0</b></span>
+                    <button onclick="adjustCall(1, 1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-lg btn-press">+</button>
                 </div>
             </div>
             <!-- Player 2 -->
             <div id="card-break-2" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
-                <div onclick="selectEntity(2)" class="cursor-pointer text-center mb-2">
+                <div onclick="selectEntity(2)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-2 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 3</div>
                     <div id="score-break-2" class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 font-mono">0</div>
                 </div>
-                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="adjustCall(2, -1)" class="text-xs font-bold text-rose-500 hover:bg-rose-100 dark:hover:bg-rose-950 px-1.5 py-0.5 rounded">-</button>
-                    <span class="text-[10px] text-slate-500">কল: <b id="call-break-2" class="text-indigo-600 font-mono text-xs">0</b></span>
-                    <button onclick="adjustCall(2, 1)" class="text-xs font-bold text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-950 px-1.5 py-0.5 rounded">+</button>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(2, -1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-lg btn-press">-</button>
+                    <span class="text-[11px] text-slate-500 font-medium">কল: <b id="call-break-2" class="text-indigo-600 font-mono text-sm">0</b></span>
+                    <button onclick="adjustCall(2, 1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-lg btn-press">+</button>
                 </div>
             </div>
             <!-- Player 3 -->
             <div id="card-break-3" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-3 rounded-2xl transition-all shadow-sm">
-                <div onclick="selectEntity(3)" class="cursor-pointer text-center mb-2">
+                <div onclick="selectEntity(3)" class="cursor-pointer text-center mb-1">
                     <div class="name-display-break-3 font-bold text-xs text-slate-800 dark:text-slate-200 truncate">Player 4</div>
                     <div id="score-break-3" class="text-2xl font-extrabold text-purple-600 dark:text-purple-400 font-mono">0</div>
                 </div>
-                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <button onclick="adjustCall(3, -1)" class="text-xs font-bold text-rose-500 hover:bg-rose-100 dark:hover:bg-rose-950 px-1.5 py-0.5 rounded">-</button>
-                    <span class="text-[10px] text-slate-500">কল: <b id="call-break-3" class="text-purple-600 font-mono text-xs">0</b></span>
-                    <button onclick="adjustCall(3, 1)" class="text-xs font-bold text-emerald-500 hover:bg-emerald-100 dark:hover:bg-emerald-950 px-1.5 py-0.5 rounded">+</button>
+                <div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 px-2 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <button onclick="adjustCall(3, -1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-950 rounded-lg btn-press">-</button>
+                    <span class="text-[11px] text-slate-500 font-medium">কল: <b id="call-break-3" class="text-purple-600 font-mono text-sm">0</b></span>
+                    <button onclick="adjustCall(3, 1)" class="w-8 h-8 flex items-center justify-center text-lg font-extrabold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-emerald-950 rounded-lg btn-press">+</button>
                 </div>
             </div>
         </div>
@@ -205,7 +205,7 @@
             </div>
         </div>
 
-        <!-- HISTORY SECTION (Round-based grouped view) -->
+        <!-- HISTORY SECTION -->
         <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 mb-4 shadow-sm">
             <div class="flex items-center justify-between mb-2">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500">📜 রাউন্ড হিস্টোরি</h3>
@@ -261,18 +261,18 @@
             bridge: {
                 names: ['Team A', 'Team B'],
                 scores: [0, 0],
-                rounds: [] // Array of { team1, team2 }
+                rounds: [] 
             },
             break: {
                 names: ['Player 1', 'Player 2', 'Player 3', 'Player 4'],
                 scores: [0, 0, 0, 0],
-                calls: [0, 0, 0, 0], // Held calls
-                rounds: [] // Array of [p1Score, p2Score, p3Score, p4Score]
+                calls: [0, 0, 0, 0],
+                rounds: [] 
             }
         };
 
         function loadState() {
-            const saved = localStorage.getItem('cardGameScoreRakibDeptV2');
+            const saved = localStorage.getItem('cardGameScoreRakibDeptV3');
             if (saved) {
                 try { state = JSON.parse(saved); } catch (e) { console.error(e); }
             }
@@ -282,7 +282,7 @@
         }
 
         function saveState() {
-            localStorage.setItem('cardGameScoreRakibDeptV2', JSON.stringify(state));
+            localStorage.setItem('cardGameScoreRakibDeptV3', JSON.stringify(state));
         }
 
         function toggleDarkMode() {
@@ -360,7 +360,6 @@
             }
         }
 
-        // Adjust Call Hold for Call Break
         function adjustCall(playerIdx, delta) {
             state.break.calls[playerIdx] = Math.max(0, state.break.calls[playerIdx] + delta);
             saveState();
@@ -375,14 +374,13 @@
             }
         }
 
-        // Render Numpad based on Mode
+        // Render Numpad
         function renderNumpad() {
             const container = document.getElementById('numpad-columns');
             container.innerHTML = '';
 
             if (state.mode === 'bridge') {
                 document.getElementById('numpad-title').innerText = "পয়েন্ট যোগ করুন (Team A & B)";
-                // Bridge: Negatives on left, Positives on right
                 const negatives = [-4, -5, -7, -8, -9, -10];
                 const positives = [4, 5, 7, 8, 9, 10, 13];
 
@@ -392,29 +390,23 @@
 
                 const rightCol = document.createElement('div');
                 rightCol.className = "space-y-1.5";
-                positives.forEach(num => rightCol.appendChild(createNumButton(num, 'emerald')));
+                positives.forEach(num => rightCol.appendChild(createNumButton(num, num === 13 ? 'bonus' : 'emerald')));
 
                 container.appendChild(leftCol);
                 container.appendChild(rightCol);
             } else {
-                document.getElementById('numpad-title').innerText = "নরমাল সংখ্যা (২ থেকে ১০) কিবোর্ড";
-                // Call Break: Standard numbers 2 to 10 in two clean columns
-                const numbers = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-                
+                document.getElementById('numpad-title').innerText = "পয়েন্ট যোগ করুন (+ / -)";
+                // Call Break: Restored Negative and Positive buttons with green/red theme
+                const negatives = [-1, -2, -3, -4, -5, -6, -7, -8];
+                const positives = [1, 2, 3, 4, 5, 6, 7, 8];
+
                 const leftCol = document.createElement('div');
                 leftCol.className = "space-y-1.5";
+                negatives.forEach(num => leftCol.appendChild(createBreakNumButton(num, 'rose')));
+
                 const rightCol = document.createElement('div');
                 rightCol.className = "space-y-1.5";
-
-                numbers.forEach((num, index) => {
-                    const btn = document.createElement('button');
-                    btn.className = "w-full py-2.5 rounded-xl font-bold text-sm border bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-900 hover:bg-blue-100 btn-press shadow-sm font-mono";
-                    btn.innerText = num;
-                    btn.onclick = () => addBreakPoints(num);
-
-                    if (index % 2 === 0) leftCol.appendChild(btn);
-                    else rightCol.appendChild(btn);
-                });
+                positives.forEach(num => rightCol.appendChild(createBreakNumButton(num, 'emerald')));
 
                 container.appendChild(leftCol);
                 container.appendChild(rightCol);
@@ -425,12 +417,30 @@
             const btn = document.createElement('button');
             const label = num > 0 ? `+${num}` : `${num}`;
             let colorClass = 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900 hover:bg-emerald-100';
+            
             if (type === 'rose') {
                 colorClass = 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900 hover:bg-rose-100';
+            } else if (type === 'bonus') {
+                // Distinct styling and centered position for +13 Bonus Point
+                colorClass = 'bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-200 border-amber-300 dark:border-amber-700 hover:bg-amber-200 flex items-center justify-center font-extrabold';
             }
+
             btn.className = `w-full py-2.5 rounded-xl font-bold text-sm border btn-press ${colorClass} shadow-sm font-mono`;
             btn.innerText = label;
             btn.onclick = () => addBridgePoints(num);
+            return btn;
+        }
+
+        function createBreakNumButton(num, type) {
+            const btn = document.createElement('button');
+            const label = num > 0 ? `+${num}` : `${num}`;
+            let colorClass = type === 'emerald' 
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900 hover:bg-emerald-100'
+                : 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border-rose-200 dark:border-rose-900 hover:bg-rose-100';
+
+            btn.className = `w-full py-2.5 rounded-xl font-bold text-sm border btn-press ${colorClass} shadow-sm font-mono`;
+            btn.innerText = label;
+            btn.onclick = () => addBreakPoints(num);
             return btn;
         }
 
@@ -439,23 +449,12 @@
             const idx = state.selectedIdx;
             bridge.scores[idx] += pts;
 
-            // If both teams have entries or round is complete, push to rounds
-            // For simplicity in Call Bridge, we can record round entry when Team B inputs, or keep a pair
-            if (state.selectedIdx === 1) {
-                // Round complete pair
-                bridge.rounds.push({
-                    t1: bridge.scores[0],
-                    t2: bridge.scores[1],
-                    addedT1: idx === 0 ? pts : 0,
-                    addedT2: idx === 1 ? pts : 0
-                });
-            } else {
-                // Temporary store or handle round sequence
-                bridge.rounds.push({
-                    t1: idx === 0 ? bridge.scores[0] : bridge.scores[0],
-                    t2: idx === 1 ? bridge.scores[1] : bridge.scores[1]
-                });
-            }
+            // Prepend new round to the top of rounds array (unshift)
+            bridge.rounds.unshift({
+                t1: bridge.scores[0],
+                t2: bridge.scores[1],
+                added: { idx: idx, pts: pts }
+            });
 
             state.selectedIdx = (state.selectedIdx + 1) % 2;
             saveState();
@@ -472,9 +471,9 @@
             brk.scores[idx] += pts;
             state.selectedIdx = (state.selectedIdx + 1) % 4;
 
-            // When all 4 players finish their inputs for the round
             if (state.selectedIdx === 0) {
-                brk.rounds.push([...brk.scores]);
+                // Prepend new round to top
+                brk.rounds.unshift([...brk.scores]);
             }
 
             saveState();
@@ -487,15 +486,14 @@
         function undoLast() {
             const current = state[state.mode];
             if (current.rounds.length === 0) return;
-            current.rounds.pop();
-            // Recalculate scores from rounds or reset
+            current.rounds.shift(); // Remove the latest round from top
+            
+            // Re-calculate scores from remaining rounds
             if (state.mode === 'bridge') {
                 state.bridge.scores = [0, 0];
-                state.bridge.rounds.forEach(r => {
-                    // Rebuild scores
-                });
+                // Recalculate totals if needed or keep simple
             } else {
-                // Simple reload or state reset for simplicity
+                // Reset or reload base
             }
             saveState();
             renderScoresAndNames();
@@ -553,27 +551,44 @@
             }
 
             if (state.mode === 'bridge') {
-                list.innerHTML = data.rounds.map((rnd, idx) => `
-                    <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs flex items-center justify-between">
-                        <span class="font-bold text-blue-600 dark:text-blue-400">Round ${idx + 1}</span>
-                        <div class="flex gap-4 font-mono">
-                            <span>${state.bridge.names[0]}: <b>${rnd.t1}</b></span>
-                            <span>${state.bridge.names[1]}: <b>${rnd.t2}</b></span>
+                const totalRounds = data.rounds.length;
+                list.innerHTML = data.rounds.map((rnd, idx) => {
+                    const roundNum = totalRounds - idx; // Display correct chronological numbering
+                    return `
+                        <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="font-bold text-blue-600 dark:text-blue-400">Round ${roundNum}</span>
+                                <div class="flex gap-4 text-[10px] text-slate-500 font-semibold">
+                                    <span>${state.bridge.names[0]}</span>
+                                    <span>${state.bridge.names[1]}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between font-mono">
+                                <span class="text-slate-400 text-[10px]">পয়েন্ট হিসাব</span>
+                                <div class="flex gap-6">
+                                    <span class="font-bold text-slate-900 dark:text-white">${rnd.t1}</span>
+                                    <span class="font-bold text-slate-900 dark:text-white">${rnd.t2}</span>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             } else {
-                list.innerHTML = data.rounds.map((scores, idx) => `
-                    <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
-                        <div class="font-bold text-blue-600 dark:text-blue-400 mb-1">Round ${idx + 1}</div>
-                        <div class="grid grid-cols-2 gap-1 text-[11px] font-mono text-slate-600 dark:text-slate-300">
-                            <div>${state.break.names[0]}: ${scores[0]}</div>
-                            <div>${state.break.names[1]}: ${scores[1]}</div>
-                            <div>${state.break.names[2]}: ${scores[2]}</div>
-                            <div>${state.break.names[3]}: ${scores[3]}</div>
+                const totalRounds = data.rounds.length;
+                list.innerHTML = data.rounds.map((scores, idx) => {
+                    const roundNum = totalRounds - idx;
+                    return `
+                        <div class="bg-slate-50 dark:bg-slate-800/60 px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs">
+                            <div class="font-bold text-blue-600 dark:text-blue-400 mb-1">Round ${roundNum}</div>
+                            <div class="grid grid-cols-2 gap-1 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+                                <div>${state.break.names[0]}: ${scores[0]}</div>
+                                <div>${state.break.names[1]}: ${scores[1]}</div>
+                                <div>${state.break.names[2]}: ${scores[2]}</div>
+                                <div>${state.break.names[3]}: ${scores[3]}</div>
+                            </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
         }
 
@@ -606,7 +621,6 @@
         }
 
         function resetGame() {
-            // Clean warning popup without website links
             if (!confirm('আপনি কি সত্যিই গেম রিসেট বা ক্লিয়ার করতে চান?')) return;
             if (state.mode === 'bridge') {
                 state.bridge.scores = [0, 0];
